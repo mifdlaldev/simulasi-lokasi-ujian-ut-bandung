@@ -1,0 +1,4 @@
+src/components/location/LocationCard.tsx:30:      <span className="mt-4 block text-xl font-bold tracking-tight">{location.schoolName}</span>
+src/components/location/LocationCard.tsx:32:        {location.address}
+src/components/location/LocationCard.tsx:39:          <span className="mt-1 block text-sm font-semibold">{location.examDate}</span>
+src/components/location/LocationCard.tsx:45:          <span className="mt-1 block text-sm font-semibold">{location.availableRooms} ruang tersedia</span>
