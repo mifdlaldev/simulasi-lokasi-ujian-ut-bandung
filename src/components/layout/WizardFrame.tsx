@@ -16,9 +16,9 @@ export function WizardFrame({
   title,
 }: WizardFrameProps) {
   return (
-    <section className="rounded-[2rem] border border-[var(--ut-border)] bg-white shadow-[var(--ut-shadow-card)]">
+    <section aria-label={title} className="rounded-[2rem] border border-[var(--ut-border)] bg-white shadow-[var(--ut-shadow-card)]">
       {mobileHeader ? <div className="border-b border-[var(--ut-border)] lg:hidden">{mobileHeader}</div> : null}
-      <div className="p-5 sm:p-8">
+      <div className="p-5 sm:p-8 lg:p-9">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
             Wizard Pemilihan Lokasi
@@ -33,7 +33,7 @@ export function WizardFrame({
         <div className="mt-7">{children}</div>
       </div>
       {footer ? (
-        <div className="flex flex-col gap-3 border-t border-[var(--ut-border)] bg-[var(--ut-surface)] px-5 py-4 sm:flex-row sm:justify-end sm:px-8">
+        <div className="flex flex-col gap-3 border-t border-[var(--ut-border)] bg-[var(--ut-surface)] px-5 py-4 sm:flex-row sm:justify-end sm:px-8 [&>button]:w-full sm:[&>button]:w-auto">
           {footer}
         </div>
       ) : null}

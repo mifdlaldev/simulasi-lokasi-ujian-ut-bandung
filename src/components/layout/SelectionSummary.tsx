@@ -10,7 +10,7 @@ function SummaryItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-[var(--ut-border)] bg-white px-4 py-3">
       <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ut-muted)]">{label}</dt>
-      <dd className="mt-1 text-sm font-semibold text-[var(--ut-blue-deep)]">{value}</dd>
+      <dd className="mt-1 break-words text-sm font-semibold text-[var(--ut-blue-deep)]">{value}</dd>
     </div>
   );
 }
@@ -19,7 +19,7 @@ export function SelectionSummary({ identity, location, region }: SelectionSummar
   const contact = identity?.email || identity?.phone || "Belum ada kontak";
 
   return (
-    <section className="rounded-[2rem] border border-[var(--ut-border)] bg-white p-5 shadow-[var(--ut-shadow-card)]">
+    <section aria-label="Ringkasan pilihan simulasi" className="rounded-[2rem] border border-[var(--ut-border)] bg-white p-4 shadow-[var(--ut-shadow-card)] sm:p-5">
       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
         Ringkasan Pilihan
       </p>

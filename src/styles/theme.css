@@ -26,6 +26,8 @@
 
 :focus {
   outline: none;
+  scroll-margin-bottom: 4rem;
+  scroll-margin-top: 5rem;
 }
 
 :focus-visible {
@@ -37,6 +39,13 @@
 a {
   color: var(--ut-blue);
   text-underline-offset: 0.2em;
+}
+
+button,
+input,
+summary,
+a {
+  overflow-wrap: anywhere;
 }
 
 .ut-campus-surface {
