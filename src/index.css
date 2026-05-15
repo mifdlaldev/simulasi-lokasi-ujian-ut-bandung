@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "./styles/theme.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ut-surface);
+  color: var(--ut-ink);
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
