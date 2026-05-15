@@ -1,0 +1,10 @@
+src/components/steps/LocationDetailStep.tsx:21:          alt={`Foto ilustrasi ${location.schoolName}`}
+src/components/steps/LocationDetailStep.tsx:23:          src={location.photoUrl}
+src/components/steps/LocationDetailStep.tsx:35:          <h3 className="mt-2 text-2xl font-bold text-[var(--ut-blue-deep)]">{location.schoolName}</h3>
+src/components/steps/LocationDetailStep.tsx:43:              <dd className="mt-1 font-bold text-[var(--ut-blue-deep)]">{location.examDate}</dd>
+src/components/steps/LocationDetailStep.tsx:50:                {location.availableRooms} ruang tersedia
+src/components/steps/LocationDetailStep.tsx:58:          <p className="mt-2 text-base leading-7 text-[var(--ut-muted)]">{location.address}</p>
+src/components/steps/LocationDetailStep.tsx:61:        <MapPreview label={location.schoolName} mapUrl={location.mapUrl} />
+src/components/location/MapPreview.tsx:3:  mapUrl: string;
+src/components/location/MapPreview.tsx:6:export function MapPreview({ label, mapUrl }: MapPreviewProps) {
+src/components/location/MapPreview.tsx:23:            href={mapUrl}
