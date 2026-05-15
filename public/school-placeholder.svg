@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustrasi sekolah lokasi ujian</title>
+  <desc id="desc">Placeholder bergaya kampus untuk foto sekolah pada prototype pemilihan lokasi ujian UT Bandung.</desc>
+  <rect width="1200" height="760" fill="#E6F0FB"/>
+  <circle cx="1020" cy="110" r="190" fill="#FFF200" opacity="0.9"/>
+  <path d="M0 586c152-90 284-109 396-57 112 51 226 51 342 1 116-51 270-32 462 57v173H0z" fill="#034694" opacity="0.14"/>
+  <path d="M150 292h900v326H150z" fill="#fff" stroke="#034694" stroke-width="18"/>
+  <path d="M108 294 600 116l492 178" fill="none" stroke="#034694" stroke-linecap="round" stroke-linejoin="round" stroke-width="26"/>
+  <path d="M254 377h140v104H254zm276 0h140v104H530zm276 0h140v104H806z" fill="#E6F0FB" stroke="#034694" stroke-width="14"/>
+  <path d="M520 618V506h160v112" fill="#FFF200" stroke="#034694" stroke-width="16"/>
+  <path d="M474 241h252" stroke="#034694" stroke-linecap="round" stroke-width="22"/>
+  <path d="M444 666h312" stroke="#022E62" stroke-linecap="round" stroke-width="22"/>
+  <text x="600" y="716" fill="#022E62" font-family="Segoe UI, sans-serif" font-size="40" font-weight="700" text-anchor="middle">Placeholder Lokasi Ujian</text>
+</svg>
