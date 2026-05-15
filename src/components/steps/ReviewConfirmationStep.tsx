@@ -60,6 +60,11 @@ export function ReviewConfirmationStep({
         />
         <span>{appCopy.acknowledgement}</span>
       </label>
+      {!acknowledgementAccepted ? (
+        <p className="-mt-3 text-sm font-medium leading-6 text-[var(--ut-danger)]">
+          Centang pernyataan untuk mengaktifkan tombol konfirmasi final.
+        </p>
+      ) : null}
 
       <div className="rounded-[1.5rem] border border-[var(--ut-yellow)] bg-[var(--ut-yellow-soft)] p-4 text-sm leading-6 text-[var(--ut-blue-deep)]">
         {appCopy.prototypeDisclaimer}

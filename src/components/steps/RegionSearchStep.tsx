@@ -3,12 +3,14 @@ import { useMemo, useState } from "react";
 import type { ExamRegion } from "../../types/location";
 
 export interface RegionSearchStepProps {
+  error?: string;
   onSelectRegion: (regionId: string) => void;
   regions: ExamRegion[];
   selectedRegionId: string;
 }
 
 export function RegionSearchStep({
+  error,
   onSelectRegion,
   regions,
   selectedRegionId,
@@ -45,6 +47,11 @@ export function RegionSearchStep({
         <p className="mt-2 text-sm leading-6 text-[var(--ut-muted)]">
           Pilih satu wilayah untuk menampilkan sekolah lokasi ujian yang tersedia.
         </p>
+        {error ? (
+          <p className="mt-2 text-sm font-medium leading-6 text-[var(--ut-danger)]" role="alert">
+            {error}
+          </p>
+        ) : null}
       </div>
 
       {selectedRegion ? (

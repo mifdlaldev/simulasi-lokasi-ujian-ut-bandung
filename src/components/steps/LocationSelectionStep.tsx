@@ -4,6 +4,7 @@ import type { ExamLocation } from "../../types/location";
 import { LocationCard } from "../location/LocationCard";
 
 export interface LocationSelectionStepProps {
+  error?: string;
   locations: ExamLocation[];
   onSelectLocation: (locationId: string) => void;
   selectedLocationId: string;
@@ -11,6 +12,7 @@ export interface LocationSelectionStepProps {
 }
 
 export function LocationSelectionStep({
+  error,
   locations,
   onSelectLocation,
   selectedLocationId,
@@ -38,15 +40,22 @@ export function LocationSelectionStep({
   }
 
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      {filteredLocations.map((location) => (
-        <LocationCard
-          key={location.id}
-          location={location}
-          onSelect={onSelectLocation}
-          selected={location.id === selectedLocationId}
-        />
-      ))}
+    <div className="space-y-4">
+      {error ? (
+        <p className="rounded-2xl border border-[var(--ut-danger)] bg-red-50 px-4 py-3 text-sm font-semibold text-[var(--ut-danger)]" role="alert">
+          {error}
+        </p>
+      ) : null}
+      <div className="grid gap-4 xl:grid-cols-2">
+        {filteredLocations.map((location) => (
+          <LocationCard
+            key={location.id}
+            location={location}
+            onSelect={onSelectLocation}
+            selected={location.id === selectedLocationId}
+          />
+        ))}
+      </div>
     </div>
   );
 }

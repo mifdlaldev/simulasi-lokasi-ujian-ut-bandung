@@ -1,4 +1,4 @@
-import { useMemo, useReducer } from "react";
+import { useMemo, useReducer, useState } from "react";
 
 import { AppShell } from "./components/layout/AppShell";
 import { MobileStepHeader } from "./components/layout/MobileStepHeader";
@@ -34,6 +34,7 @@ const stepDescriptions: Record<WizardStep, string> = {
 
 export default function App() {
   const [state, dispatch] = useReducer(wizardReducer, initialWizardState);
+  const [attemptedStep, setAttemptedStep] = useState<WizardStep | null>(null);
 
   const currentStepIndex = wizardSteps.indexOf(state.currentStep);
   const selectedRegion = useMemo(
@@ -49,7 +50,11 @@ export default function App() {
     () => wizardSteps.map((step) => ({ id: step, label: stepLabels[step] })),
     [],
   );
+  const validation = canContinueFromStep(state);
+  const showErrors = attemptedStep === state.currentStep && !validation.canContinue;
+
   function goToPreviousStep() {
+    setAttemptedStep(null);
     dispatch({ type: "SET_STEP", step: getPreviousStep(state.currentStep) });
   }
 
@@ -57,9 +62,11 @@ export default function App() {
     const nextValidation = canContinueFromStep(state);
 
     if (!nextValidation.canContinue) {
+      setAttemptedStep(state.currentStep);
       return;
     }
 
+    setAttemptedStep(null);
     dispatch({ type: "SET_STEP", step: getNextStep(state.currentStep) });
   }
 
@@ -87,6 +94,7 @@ export default function App() {
       case "identity":
         return (
           <StudentIdentityStep
+            errors={showErrors ? validation.identityErrors : {}}
             onChange={(identity) => dispatch({ type: "SET_IDENTITY", identity })}
             value={state.identity}
           />
@@ -95,8 +103,10 @@ export default function App() {
         return (
           <RegionSearchStep
             onSelectRegion={(regionId) => {
+              setAttemptedStep(null);
               dispatch({ type: "SET_REGION", regionId });
             }}
+            error={showErrors ? validation.stepError : ""}
             regions={examRegions}
             selectedRegionId={state.selectedRegionId}
           />
@@ -104,8 +114,10 @@ export default function App() {
       case "location":
         return (
           <LocationSelectionStep
+            error={showErrors ? validation.stepError : ""}
             locations={examLocations}
             onSelectLocation={(locationId) => {
+              setAttemptedStep(null);
               dispatch({ type: "SET_LOCATION", locationId });
             }}
             selectedLocationId={state.selectedLocationId}
@@ -121,15 +133,18 @@ export default function App() {
             identity={state.identity}
             location={selectedLocation}
             onAcknowledgementChange={(accepted) => {
+              setAttemptedStep(null);
               dispatch({ type: "SET_ACKNOWLEDGEMENT", accepted });
             }}
             onConfirm={() => {
               const reviewValidation = canContinueFromStep(state, "review");
 
               if (!reviewValidation.canContinue) {
+                setAttemptedStep("review");
                 return;
               }
 
+              setAttemptedStep(null);
               dispatch({ type: "CONFIRM_FINAL" });
             }}
             region={selectedRegion}
