@@ -1,0 +1,68 @@
+:root {
+  --ut-blue: #034694;
+  --ut-blue-deep: #022e62;
+  --ut-blue-soft: #e6f0fb;
+  --ut-yellow: #fff200;
+  --ut-yellow-soft: #fff9b0;
+  --ut-white: #ffffff;
+  --ut-surface: #f5f8fc;
+  --ut-ink: #102033;
+  --ut-muted: #52657a;
+  --ut-border: #d9e4ef;
+  --ut-border-strong: #a9bdd4;
+  --ut-danger: #b42318;
+  --ut-success: #087443;
+  --ut-shadow-soft: 0 24px 70px rgba(3, 70, 148, 0.14);
+  --ut-shadow-card: 0 18px 42px rgba(16, 32, 51, 0.12);
+  --ut-focus-ring: 0 0 0 3px rgba(255, 242, 0, 0.7),
+    0 0 0 6px rgba(3, 70, 148, 0.42);
+}
+
+::selection {
+  background: var(--ut-yellow);
+  color: var(--ut-blue-deep);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  box-shadow: var(--ut-focus-ring);
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--ut-blue);
+  text-underline-offset: 0.2em;
+}
+
+.ut-campus-surface {
+  background:
+    radial-gradient(circle at top left, rgba(255, 242, 0, 0.26), transparent 28rem),
+    linear-gradient(135deg, #f8fbff 0%, #eef5fd 46%, #ffffff 100%);
+}
+
+.ut-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
