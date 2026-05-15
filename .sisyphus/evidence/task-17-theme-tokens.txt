@@ -1,0 +1,10 @@
+src/styles/theme.css:2:  --ut-blue: #034694;
+src/styles/theme.css:11:  --ut-border: #d9e4ef;
+src/styles/theme.css:12:  --ut-border-strong: #a9bdd4;
+src/styles/theme.css:18:  --ut-focus-ring: 0 0 0 3px rgba(255, 242, 0, 0.7),
+src/styles/theme.css:27::focus {
+src/styles/theme.css:31::focus-visible {
+src/styles/theme.css:32:  box-shadow: var(--ut-focus-ring);
+src/styles/theme.css:53:  border: 1px solid rgba(217, 228, 239, 0.96);
+src/styles/theme.css:71:  border: 0;
+src/index.css:5:  box-sizing: border-box;

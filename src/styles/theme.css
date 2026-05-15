@@ -14,6 +14,7 @@
   --ut-success: #087443;
   --ut-shadow-soft: 0 24px 70px rgba(3, 70, 148, 0.14);
   --ut-shadow-card: 0 18px 42px rgba(16, 32, 51, 0.12);
+  --ut-shadow-official: 0 30px 90px rgba(2, 46, 98, 0.18);
   --ut-focus-ring: 0 0 0 3px rgba(255, 242, 0, 0.7),
     0 0 0 6px rgba(3, 70, 148, 0.42);
 }
@@ -40,8 +41,22 @@ a {
 
 .ut-campus-surface {
   background:
-    radial-gradient(circle at top left, rgba(255, 242, 0, 0.26), transparent 28rem),
+    linear-gradient(90deg, rgba(3, 70, 148, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(3, 70, 148, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at top left, rgba(255, 242, 0, 0.34), transparent 28rem),
+    radial-gradient(circle at 90% 12%, rgba(3, 70, 148, 0.16), transparent 22rem),
     linear-gradient(135deg, #f8fbff 0%, #eef5fd 46%, #ffffff 100%);
+  background-size: 72px 72px, 72px 72px, auto, auto, auto;
+}
+
+.ut-official-card {
+  border: 1px solid rgba(217, 228, 239, 0.96);
+  box-shadow: var(--ut-shadow-official);
+}
+
+.ut-yellow-accent {
+  background: linear-gradient(90deg, var(--ut-yellow), #fff9b0);
+  color: var(--ut-blue-deep);
 }
 
 .ut-sr-only {

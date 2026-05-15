@@ -21,9 +21,10 @@ export function AppShell({ children, currentStepId, steps, summary }: AppShellPr
         Lewati ke isi wizard
       </a>
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <header className="overflow-hidden rounded-[2rem] border border-white/80 bg-[var(--ut-blue)] text-white shadow-[var(--ut-shadow-soft)]">
+        <header className="ut-official-card overflow-hidden rounded-[2rem] bg-[var(--ut-blue)] text-white">
           <div className="relative px-6 py-7 sm:px-8 lg:px-10">
             <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-[5rem] bg-[var(--ut-yellow)]/95" aria-hidden="true" />
+            <div className="absolute bottom-0 right-14 h-1.5 w-48 rounded-full bg-[var(--ut-yellow)]" aria-hidden="true" />
             <p className="relative text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ut-yellow)]">
               {brandName}
             </p>
