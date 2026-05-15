@@ -1,0 +1,12 @@
+1:import type { StudentIdentity } from "../types/location";
+18:  if (!hasText(identity.nim)) {
+19:    errors.nim = "NIM wajib diisi.";
+22:  if (!hasText(identity.name)) {
+23:    errors.name = "Nama mahasiswa wajib diisi.";
+26:  if (!hasText(identity.programStudy)) {
+27:    errors.programStudy = "Program studi wajib diisi.";
+30:  if (!hasText(identity.email) && !hasText(identity.phone)) {
+31:    errors.email = "Isi email atau nomor HP sebagai kontak.";
+32:    errors.phone = "Isi nomor HP atau email sebagai kontak.";
+53:  if (step === "region" && !hasText(state.selectedRegionId)) {
+61:  if (step === "location" && !hasText(state.selectedLocationId)) {
