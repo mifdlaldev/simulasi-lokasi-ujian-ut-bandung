@@ -1,31 +1,56 @@
 export interface MapPreviewProps {
+  address: string;
   label: string;
+  latitude: number;
+  longitude: number;
   mapUrl: string;
 }
 
-export function MapPreview({ label, mapUrl }: MapPreviewProps) {
+function createOpenStreetMapEmbedUrl(latitude: number, longitude: number): string {
+  const latitudeDelta = 0.006;
+  const longitudeDelta = 0.008;
+  const bbox = [
+    longitude - longitudeDelta,
+    latitude - latitudeDelta,
+    longitude + longitudeDelta,
+    latitude + latitudeDelta,
+  ].join(",");
+
+  return `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${latitude},${longitude}`;
+}
+
+export function MapPreview({ address, label, latitude, longitude, mapUrl }: MapPreviewProps) {
+  const openStreetMapEmbedUrl = createOpenStreetMapEmbedUrl(latitude, longitude);
+
   return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-[var(--ut-border)] bg-[var(--ut-blue-soft)]">
-      <div className="relative min-h-56 p-5">
-        <div className="absolute inset-0 opacity-70" aria-hidden="true">
-          <div className="h-full w-full bg-[linear-gradient(135deg,rgba(3,70,148,0.16)_25%,transparent_25%),linear-gradient(225deg,rgba(3,70,148,0.14)_25%,transparent_25%),linear-gradient(45deg,rgba(255,242,0,0.28)_25%,transparent_25%)] bg-[length:54px_54px]" />
-        </div>
-        <div className="relative flex min-h-44 flex-col justify-end rounded-[1.25rem] border border-white/70 bg-white/86 p-5 shadow-[0_18px_36px_rgba(3,70,148,0.12)]">
+    <div className="overflow-hidden rounded-[1.5rem] border border-[var(--ut-border)] bg-white shadow-[0_14px_32px_rgba(16,32,51,0.08)]">
+      <iframe
+        className="h-72 w-full border-0"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        src={openStreetMapEmbedUrl}
+        title={`Pratinjau peta ${label}`}
+      />
+      <div className="border-t border-[var(--ut-border)] p-5">
+        <div className="rounded-[1.25rem] border border-[var(--ut-border)] bg-[var(--ut-surface)] p-5">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
             Pratinjau Peta
           </p>
           <h3 className="mt-2 text-xl font-bold text-[var(--ut-blue-deep)]">{label}</h3>
           <p className="mt-2 text-sm leading-6 text-[var(--ut-muted)]">
-            Tautan peta membuka Google Maps di tab baru tanpa API key atau pengambilan data dinamis.
+            Pratinjau memakai OpenStreetMap gratis. Koordinat bersifat dummy/prototype dan dapat diganti ketika data lokasi final tersedia.
           </p>
-          <a
-            className="mt-4 inline-flex w-fit min-h-11 items-center justify-center rounded-full bg-[var(--ut-blue)] px-5 py-2.5 text-sm font-semibold text-white no-underline transition-colors duration-200 hover:bg-[var(--ut-blue-deep)] focus-visible:shadow-[var(--ut-focus-ring)]"
-            href={mapUrl}
-            rel="noreferrer"
-            target="_blank"
-          >
-            Buka lokasi di peta
-          </a>
+          <p className="mt-2 text-sm leading-6 text-[var(--ut-blue-deep)]">{address}</p>
+          <div className="mt-4">
+            <a
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[var(--ut-border-strong)] bg-white px-5 py-2.5 text-sm font-semibold text-[var(--ut-blue)] no-underline transition-colors duration-200 hover:border-[var(--ut-blue)] hover:bg-[var(--ut-blue-soft)] focus-visible:shadow-[var(--ut-focus-ring)]"
+              href={mapUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Buka di Google Maps
+            </a>
+          </div>
         </div>
       </div>
     </div>
