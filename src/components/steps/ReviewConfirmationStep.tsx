@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { appCopy } from "../../content/copy";
 import type { ExamLocation, ExamRegion, StudentIdentity } from "../../types/location";
 import { Button } from "../ui/Button";
@@ -28,6 +29,31 @@ export function ReviewConfirmationStep({
   onConfirm,
   region,
 }: ReviewConfirmationStepProps) {
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!confirmationModalOpen) {
+      return;
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setConfirmationModalOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [confirmationModalOpen]);
+
+  function handleFinalConfirm() {
+    setConfirmationModalOpen(false);
+    onConfirm();
+  }
+
   return (
     <div className="space-y-6">
       <dl className="grid gap-3 sm:grid-cols-2">
@@ -70,9 +96,65 @@ export function ReviewConfirmationStep({
         {appCopy.prototypeDisclaimer}
       </div>
 
-      <Button disabled={!acknowledgementAccepted} onClick={onConfirm}>
+      <Button className="w-full" disabled={!acknowledgementAccepted} onClick={() => setConfirmationModalOpen(true)}>
         Konfirmasi Final Simulasi
       </Button>
+
+      {confirmationModalOpen ? (
+        <div
+          aria-describedby="final-confirmation-description"
+          aria-labelledby="final-confirmation-title"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(3,22,50,0.78)] p-4 backdrop-blur-sm"
+          onClick={() => setConfirmationModalOpen(false)}
+          role="dialog"
+        >
+          <section
+            className="w-full max-w-xl rounded-[2rem] border border-white/30 bg-white p-6 shadow-[0_28px_90px_rgba(0,0,0,0.32)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
+              Konfirmasi Akhir
+            </p>
+            <h3 className="mt-2 text-2xl font-bold text-[var(--ut-blue-deep)]" id="final-confirmation-title">
+              Pastikan pilihan simulasi sudah sesuai
+            </h3>
+            <p className="mt-3 text-sm leading-6 text-[var(--ut-muted)]" id="final-confirmation-description">
+              Anda akan menyelesaikan simulasi pemilihan lokasi ujian dengan sekolah, wilayah,
+              tanggal, kuota, alamat, foto, dan peta yang sudah ditinjau. Data ini masih bersifat
+              dummy untuk kebutuhan prototype.
+            </p>
+
+            <dl className="mt-5 grid gap-3 rounded-[1.5rem] bg-[var(--ut-blue-soft)] p-4 text-sm text-[var(--ut-blue-deep)]">
+              <div>
+                <dt className="font-semibold">Sekolah</dt>
+                <dd>{location?.schoolName ?? "Belum memilih sekolah"}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold">Tanggal Ujian</dt>
+                <dd>{location ? `${location.examDate} · ${location.examTime}` : "Belum memilih jadwal"}</dd>
+              </div>
+            </dl>
+
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <button
+                className="rounded-full border border-[var(--ut-border-strong)] bg-white px-5 py-3 text-sm font-bold text-[var(--ut-blue-deep)] transition hover:border-[var(--ut-blue)] focus-visible:shadow-[var(--ut-focus-ring)]"
+                onClick={() => setConfirmationModalOpen(false)}
+                type="button"
+              >
+                Periksa Kembali
+              </button>
+              <button
+                className="rounded-full bg-[var(--ut-blue)] px-5 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(0,80,158,0.22)] transition hover:bg-[var(--ut-blue-deep)] focus-visible:shadow-[var(--ut-focus-ring)]"
+                onClick={handleFinalConfirm}
+                type="button"
+              >
+                Ya, Konfirmasi Sekarang
+              </button>
+            </div>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }
