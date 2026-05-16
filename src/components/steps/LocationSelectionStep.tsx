@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 import type { ExamLocation } from "../../types/location";
+import { getEstimatedSeatCount } from "../../utils/quota";
 import { LocationCard } from "../location/LocationCard";
 
 export interface LocationSelectionStepProps {
@@ -9,6 +10,7 @@ export interface LocationSelectionStepProps {
   onSelectLocation: (locationId: string) => void;
   selectedLocationId: string;
   selectedRegionId: string;
+  selectedRegionName?: string;
 }
 
 export function LocationSelectionStep({
@@ -17,11 +19,20 @@ export function LocationSelectionStep({
   onSelectLocation,
   selectedLocationId,
   selectedRegionId,
+  selectedRegionName = "wilayah yang dipilih",
 }: LocationSelectionStepProps) {
   const filteredLocations = useMemo(
     () => locations.filter((location) => location.regionId === selectedRegionId),
     [locations, selectedRegionId],
   );
+  const availableLocationCount = filteredLocations.filter(
+    (location) => location.availableRooms > 0,
+  ).length;
+  const availableRoomCount = filteredLocations.reduce(
+    (total, location) => total + location.availableRooms,
+    0,
+  );
+  const estimatedSeatCount = getEstimatedSeatCount(availableRoomCount);
 
   if (!selectedRegionId) {
     return (
@@ -41,6 +52,15 @@ export function LocationSelectionStep({
 
   return (
     <div className="space-y-4">
+      {availableRoomCount > 0 ? (
+        <div className="rounded-2xl border border-[var(--ut-blue)] bg-[var(--ut-blue-soft)] px-4 py-3 text-sm leading-6 text-[var(--ut-blue-deep)]">
+          <strong>{selectedRegionName}</strong> memiliki {availableLocationCount} lokasi, {availableRoomCount} ruang, dan ±{estimatedSeatCount} kursi tersedia.
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-[var(--ut-danger)] bg-red-50 px-4 py-3 text-sm leading-6 text-[var(--ut-danger)]" role="status">
+          <strong>Kuota penuh.</strong> Semua lokasi ujian di {selectedRegionName} sudah penuh. Silakan kembali dan pilih wilayah terdekat lain.
+        </div>
+      )}
       {error ? (
         <p className="rounded-2xl border border-[var(--ut-danger)] bg-red-50 px-4 py-3 text-sm font-semibold text-[var(--ut-danger)]" role="alert">
           {error}

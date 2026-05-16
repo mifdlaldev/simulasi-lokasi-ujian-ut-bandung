@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 
-import type { ExamRegion } from "../../types/location";
+import type { ExamLocation, ExamRegion } from "../../types/location";
 
 export interface RegionSearchStepProps {
   error?: string;
+  locations: ExamLocation[];
   onSelectRegion: (regionId: string) => void;
   regions: ExamRegion[];
   selectedRegionId: string;
@@ -11,6 +12,7 @@ export interface RegionSearchStepProps {
 
 export function RegionSearchStep({
   error,
+  locations,
   onSelectRegion,
   regions,
   selectedRegionId,
@@ -28,6 +30,25 @@ export function RegionSearchStep({
       region.name.toLocaleLowerCase("id-ID").includes(normalizedQuery),
     );
   }, [normalizedQuery, regions]);
+
+  const regionAvailability = useMemo(() => {
+    return regions.reduce<Record<string, { locationCount: number; availableRooms: number }>>(
+      (availability, region) => {
+        const regionLocations = locations.filter((location) => location.regionId === region.id);
+
+        availability[region.id] = {
+          availableRooms: regionLocations.reduce(
+            (total, location) => total + location.availableRooms,
+            0,
+          ),
+          locationCount: regionLocations.length,
+        };
+
+        return availability;
+      },
+      {},
+    );
+  }, [locations, regions]);
 
   return (
     <div className="space-y-5">
@@ -64,12 +85,17 @@ export function RegionSearchStep({
         {filteredRegions.length > 0 ? (
           filteredRegions.map((region) => {
             const selected = region.id === selectedRegionId;
+            const availability = regionAvailability[region.id] ?? {
+              availableRooms: 0,
+              locationCount: 0,
+            };
+            const hasQuota = availability.availableRooms > 0;
 
             return (
               <button
                 aria-pressed={selected}
                 className={[
-                  "flex min-h-14 items-center justify-between rounded-2xl border px-4 py-3 text-left transition-colors duration-200 focus-visible:shadow-[var(--ut-focus-ring)]",
+                  "flex min-h-20 items-center justify-between gap-4 rounded-2xl border px-4 py-3 text-left transition-colors duration-200 focus-visible:shadow-[var(--ut-focus-ring)]",
                   selected
                     ? "border-[var(--ut-blue)] bg-[var(--ut-blue)] text-white"
                     : "border-[var(--ut-border)] bg-white text-[var(--ut-ink)] hover:border-[var(--ut-blue)] hover:bg-[var(--ut-blue-soft)]",
@@ -78,9 +104,30 @@ export function RegionSearchStep({
                 onClick={() => onSelectRegion(region.id)}
                 type="button"
               >
-                <span className="font-semibold">{region.name}</span>
-                <span className={selected ? "text-white/80" : "text-[var(--ut-muted)]"}>
-                  {selected ? "Terpilih" : "Pilih"}
+                <span className="min-w-0">
+                  <span className="block font-semibold">{region.name}</span>
+                  <span className={selected ? "mt-1 block text-sm text-white/80" : "mt-1 block text-sm text-[var(--ut-muted)]"}>
+                    {availability.locationCount} lokasi ujian · {hasQuota ? `${availability.availableRooms} ruang tersedia` : "Kuota penuh"}
+                  </span>
+                </span>
+                <span className="flex shrink-0 items-center gap-2">
+                  <span
+                    className={[
+                      "rounded-full px-3 py-1 text-xs font-bold",
+                      hasQuota
+                        ? selected
+                          ? "bg-white/16 text-[var(--ut-yellow)]"
+                          : "bg-[var(--ut-blue-soft)] text-[var(--ut-blue)]"
+                        : selected
+                          ? "bg-white/16 text-white"
+                          : "bg-red-50 text-[var(--ut-danger)]",
+                    ].join(" ")}
+                  >
+                    {hasQuota ? "Tersedia" : "Kuota penuh"}
+                  </span>
+                  <span className={selected ? "text-white/80" : "text-[var(--ut-muted)]"}>
+                    {selected ? "Terpilih" : "Pilih"}
+                  </span>
                 </span>
               </button>
             );
