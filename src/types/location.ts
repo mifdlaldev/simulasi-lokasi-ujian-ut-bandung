@@ -16,10 +16,14 @@ export interface ExamLocation {
   regionId: string;
   schoolName: string;
   examDate: string;
+  examTime: string;
   availableRooms: number;
   address: string;
+  latitude: number;
+  longitude: number;
   mapUrl: string;
   photoUrl: string;
+  galleryPhotoUrls: string[];
   description: string;
 }
 
