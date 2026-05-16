@@ -15,7 +15,7 @@ export function MobileStepHeader({
 }: MobileStepHeaderProps) {
   const safeTotal = Math.max(totalSteps, 1);
   const safeCurrent = Math.min(Math.max(currentStepIndex, 1), safeTotal);
-  const progressPercent = Math.round((safeCurrent / safeTotal) * 100);
+  const stepFraction = `${safeCurrent}/${safeTotal}`;
 
   return (
     <div className="space-y-3 p-4">
@@ -27,14 +27,15 @@ export function MobileStepHeader({
           <h2 className="mt-1 text-lg font-bold text-[var(--ut-blue-deep)]">{currentStepLabel}</h2>
         </div>
         <div
-          aria-label={`Progres ${progressPercent} persen`}
-          aria-valuemax={100}
-          aria-valuemin={0}
-          aria-valuenow={progressPercent}
+          aria-label={`Langkah ${safeCurrent} dari ${safeTotal}`}
+          aria-valuemax={safeTotal}
+          aria-valuemin={1}
+          aria-valuenow={safeCurrent}
+          aria-valuetext={`Langkah ${safeCurrent} dari ${safeTotal}`}
           className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--ut-yellow)] text-sm font-black text-[var(--ut-blue-deep)]"
           role="progressbar"
         >
-          {progressPercent}%
+          {stepFraction}
         </div>
       </div>
 

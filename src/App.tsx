@@ -1,4 +1,4 @@
-import { useMemo, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 
 import { AppShell } from "./components/layout/AppShell";
 import { MobileStepHeader } from "./components/layout/MobileStepHeader";
@@ -53,6 +53,10 @@ export default function App() {
   const validation = canContinueFromStep(state);
   const showErrors = attemptedStep === state.currentStep && !validation.canContinue;
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [state.currentStep]);
+
   function goToPreviousStep() {
     setAttemptedStep(null);
     dispatch({ type: "SET_STEP", step: getPreviousStep(state.currentStep) });
@@ -102,6 +106,7 @@ export default function App() {
       case "region":
         return (
           <RegionSearchStep
+            locations={examLocations}
             onSelectRegion={(regionId) => {
               setAttemptedStep(null);
               dispatch({ type: "SET_REGION", regionId });
@@ -122,6 +127,7 @@ export default function App() {
             }}
             selectedLocationId={state.selectedLocationId}
             selectedRegionId={state.selectedRegionId}
+            selectedRegionName={selectedRegion?.name}
           />
         );
       case "detail":

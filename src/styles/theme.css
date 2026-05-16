@@ -15,8 +15,7 @@
   --ut-shadow-soft: 0 24px 70px rgba(3, 70, 148, 0.14);
   --ut-shadow-card: 0 18px 42px rgba(16, 32, 51, 0.12);
   --ut-shadow-official: 0 30px 90px rgba(2, 46, 98, 0.18);
-  --ut-focus-ring: 0 0 0 3px rgba(255, 242, 0, 0.7),
-    0 0 0 6px rgba(3, 70, 148, 0.42);
+  --ut-focus-ring: 0 0 0 3px rgba(3, 70, 148, 0.5);
 }
 
 ::selection {

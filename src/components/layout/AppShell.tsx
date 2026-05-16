@@ -23,7 +23,7 @@ export function AppShell({ children, currentStepId, steps, summary }: AppShellPr
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
         <header className="ut-official-card overflow-hidden rounded-[2rem] bg-[var(--ut-blue)] text-white">
           <div className="relative px-6 py-7 sm:px-8 lg:px-10">
-            <div className="absolute right-0 top-0 h-32 w-32 rounded-bl-[5rem] bg-[var(--ut-yellow)]/95" aria-hidden="true" />
+            <div className="absolute right-[-5.75rem] top-[-5.75rem] h-28 w-28 rounded-bl-[3rem] bg-[var(--ut-yellow)]/95 lg:right-0 lg:top-0 lg:h-32 lg:w-32 lg:rounded-bl-[5rem]" aria-hidden="true" />
             <div className="absolute bottom-0 right-14 h-1.5 w-48 rounded-full bg-[var(--ut-yellow)]" aria-hidden="true" />
             <p className="relative text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ut-yellow)]">
               {brandName}
