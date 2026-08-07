@@ -1,4 +1,0 @@
-37:    case "SET_IDENTITY":
-39:    case "SET_REGION":
-45:    case "SET_LOCATION":
-49:    case "CONFIRM_FINAL":

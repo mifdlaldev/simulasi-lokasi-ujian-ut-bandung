@@ -1,2 +1,0 @@
-schoolName count: 12
-region name count: 6

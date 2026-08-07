@@ -1,5 +1,29 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
-.playwright-mcp/
+
+# Environment
 .env
 .env.*
+
+# Agent tooling (artefak lokal, bukan bagian source code)
+.omo/
+.sisyphus/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Browser automation (Playwright MCP)
+.playwright-mcp/

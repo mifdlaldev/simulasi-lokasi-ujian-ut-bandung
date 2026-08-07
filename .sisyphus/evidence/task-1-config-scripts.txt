@@ -1,2 +1,0 @@
-build,dev,preview
-vite.config.ts package.json

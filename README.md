@@ -82,4 +82,3 @@ Baca `AGENTS.md` untuk aturan lengkap, peta struktur, konvensi, dan anti-pattern
 - `src/components/steps/` — komponen tiap langkah wizard.
 - `src/components/layout/` — shell, frame, dan ringkasan pilihan.
 - `src/components/ui/` — primitive UI bersama.
-- `.sisyphus/evidence/` — catatan evidence hasil verifikasi agent.

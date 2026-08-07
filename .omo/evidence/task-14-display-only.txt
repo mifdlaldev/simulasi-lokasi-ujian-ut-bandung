@@ -1,1 +1,0 @@
-No direct wizard mutation action code found in summary/header components.

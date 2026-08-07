@@ -1,1 +1,0 @@
-3:// Data dummy/prototype untuk simulasi pemilihan lokasi ujian UT Bandung.

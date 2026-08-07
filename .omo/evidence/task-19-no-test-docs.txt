@@ -1,7 +1,0 @@
-README automated test documentation verification
-
-Command checked:
-grep -n "npm test\|vitest\|playwright test\|jest" README.md || true
-
-Result:
-No automated test commands or frameworks are advertised in README.md for initial development.

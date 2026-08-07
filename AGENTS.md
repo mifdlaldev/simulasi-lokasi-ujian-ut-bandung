@@ -98,4 +98,4 @@ npm run preview -- --host 127.0.0.1
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
 - Branch aktif: `develop`. Branch `main` tertinggal (tidak up-to-date) — jangan asumsikan `main` = kode terbaru.
 - Tanpa license file di repo.
-- Catatan verifikasi agent historis: `.sisyphus/evidence/`. Hanya tambahkan evidence hasil verifikasi sungguhan (lihat Aturan Utama #5).
+- Verifikasi agent dicatat lokal di `.sisyphus/evidence/` / `.omo/evidence/` (folder di-ignore git, tidak di-commit). Hanya tulis hasil verifikasi sungguhan (lihat Aturan Utama #5).

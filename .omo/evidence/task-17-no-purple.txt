@@ -1,1 +1,0 @@
-No purple/violet gradient theme tokens or classes found in src.

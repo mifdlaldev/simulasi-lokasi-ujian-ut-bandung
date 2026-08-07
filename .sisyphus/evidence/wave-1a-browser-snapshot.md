@@ -1,5 +1,0 @@
-- main [ref=e3]:
-  - generic [ref=e4]:
-    - paragraph [ref=e5]: Universitas Terbuka Bandung
-    - heading "Simulasi Pemilihan Lokasi Ujian" [level=1] [ref=e6]
-    - paragraph [ref=e7]: Fondasi prototype sudah siap. Alur wizard pemilihan lokasi ujian akan mulai dirangkai pada wave berikutnya.

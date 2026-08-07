@@ -1,7 +1,0 @@
-24:        label="NIM"
-41:        label="Nama Mahasiswa"
-50:          placeholder="Nama lengkap"
-57:        label="Program Studi"
-73:        label="Email"
-75:        helperText="Isi email atau nomor HP; minimal salah satu kontak wajib ada."
-90:          label="Nomor Telepon / HP"
