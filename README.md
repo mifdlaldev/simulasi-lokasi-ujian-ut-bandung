@@ -71,6 +71,7 @@ src/
 │   └── ui/               # Button, FormField, Stepper, SummaryItem
 ├── content/              # copy.ts (semua teks UI), brand.ts (warna UT)
 ├── data/                 # examLocations.ts, programStudies.ts (data dummy)
+├── hooks/                # useDialogFocus (focus trap dialog/lightbox)
 ├── state/                # wizardReducer.ts, validation.ts (pure functions)
 ├── styles/               # theme.css (design tokens)
 ├── types/                # wizard.ts, location.ts
@@ -112,6 +113,7 @@ docs/screenshots/         # tangkapan layar alur wizard
 | Perintah | Deskripsi |
 |----------|-----------|
 | `npm run dev` | Jalankan server development (host `127.0.0.1`) |
+| `npm run typecheck` | Type-check TypeScript (`tsc --noEmit`) |
 | `npm run build` | Build versi produksi ke `dist/` |
 | `npm run preview` | Preview hasil build secara lokal |
 

@@ -40,13 +40,14 @@ src/
 │   ├── steps/            # 6 step wizard (StudentIdentity → RegionSearch → LocationSelection → LocationDetail → ReviewConfirmation → Success)
 │   ├── layout/           # AppShell, WizardFrame, SelectionSummary, MobileStepHeader
 │   ├── location/         # LocationCard, MapPreview
-│   └── ui/               # Button, FormField, Stepper
+│   └── ui/               # Button, FormField, Stepper, SummaryItem
 ├── content/              # copy.ts (SEMUA teks UI), brand.ts (warna UT)
 ├── data/                 # examLocations.ts, programStudies.ts (data dummy)
+├── hooks/                # useDialogFocus (focus trap dialog/lightbox)
 ├── state/                # wizardReducer.ts, validation.ts (pure functions)
 ├── styles/               # theme.css (design tokens)
 ├── types/                # wizard.ts, location.ts
-└── utils/                # quota.ts
+└── utils/                # cx.ts, quota.ts
 ```
 
 ## 4. WHERE TO LOOK
@@ -87,13 +88,14 @@ src/
 ```bash
 npm install                     # install dependency
 npm run dev                     # dev server (host 127.0.0.1)
+npm run typecheck               # type-check via tsc --noEmit (tsconfig.json)
 npm run build                   # build produksi — WAJIB dijalankan untuk verifikasi
 npm run preview -- --host 127.0.0.1
 ```
 
 ## 8. NOTES / GOTCHAS
 
-- Repo tanpa `tsconfig.json` — type-check via editor/`vite build` (esbuild).
+- Type-check via `npm run typecheck` (`tsc --noEmit`, `tsconfig.json`). Perhatikan: `vite build` (esbuild) TIDAK mengecek tipe — selalu jalankan `typecheck` sebelum push.
 - Tanpa automated test. Verifikasi = `npm run build` + smoke check manual/browser.
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
 - Branch aktif: `main` (single branch). Semua perubahan langsung di-commit ke `main` dan di-push — tidak ada branch lain.

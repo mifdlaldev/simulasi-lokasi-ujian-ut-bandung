@@ -136,6 +136,7 @@ export const regionStepCopy = {
 };
 
 export const locationStepCopy = {
+  fallbackRegionName: "wilayah yang dipilih",
   noRegion:
     "Pilih kabupaten/kota terlebih dahulu untuk melihat daftar sekolah lokasi ujian.",
   noLocations: "Belum ada lokasi ujian dummy untuk wilayah yang dipilih.",
@@ -220,6 +221,30 @@ export const reviewStepCopy = {
   modalScheduleFallback: "Belum memilih jadwal",
   modalCancel: "Periksa Kembali",
   modalConfirm: "Ya, Konfirmasi Sekarang",
+};
+
+export const validationCopy = {
+  nimRequired: "NIM wajib diisi.",
+  nimDigitsOnly: "NIM hanya boleh berisi angka.",
+  nimLength: "NIM harus terdiri dari 9 digit angka.",
+  nameRequired: "Nama mahasiswa wajib diisi.",
+  programStudyRequired: "Program studi wajib diisi.",
+  phoneDigitsOnly: "Nomor HP hanya boleh berisi angka.",
+  phoneMaxLength: "Nomor HP maksimal 12 digit.",
+  emailInvalid:
+    "Email harus menggunakan alamat Gmail, contoh nama@gmail.com.",
+  contactRequiredEmail: "Isi email atau nomor HP sebagai kontak.",
+  contactRequiredPhone: "Isi nomor HP atau email sebagai kontak.",
+  identityIncomplete: "Lengkapi identitas mahasiswa terlebih dahulu.",
+  regionRequired: "Pilih kabupaten/kota wilayah ujian terlebih dahulu.",
+  regionFull: (regionName: string) =>
+    `Semua lokasi ujian di ${regionName} sudah penuh. Silakan pilih wilayah terdekat lain.`,
+  selectedLocationFull:
+    "Lokasi ujian yang dipilih sudah penuh. Silakan pilih lokasi lain.",
+  locationRequired: "Pilih sekolah lokasi ujian terlebih dahulu.",
+  detailRequiresLocation: "Detail lokasi membutuhkan pilihan sekolah ujian.",
+  acknowledgementRequired:
+    "Centang pernyataan sebelum konfirmasi final.",
 };
 
 export const successStepCopy = {

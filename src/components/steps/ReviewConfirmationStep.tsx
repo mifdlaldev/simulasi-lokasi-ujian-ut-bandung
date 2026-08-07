@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { appCopy, reviewStepCopy } from "../../content/copy";
+import { useDialogFocus } from "../../hooks/useDialogFocus";
 import type { ExamLocation, ExamRegion, StudentIdentity } from "../../types/location";
 import { Button } from "../ui/Button";
 import { SummaryItem } from "../ui/SummaryItem";
@@ -22,6 +23,7 @@ export function ReviewConfirmationStep({
   region,
 }: ReviewConfirmationStepProps) {
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
+  const modalRef = useDialogFocus<HTMLElement>(confirmationModalOpen);
 
   useEffect(() => {
     if (!confirmationModalOpen) {
@@ -101,6 +103,7 @@ export function ReviewConfirmationStep({
           <section
             className="w-full max-w-xl rounded-[2rem] border border-white/30 bg-white p-6 shadow-[0_28px_90px_rgba(0,0,0,0.32)]"
             onClick={(event) => event.stopPropagation()}
+            ref={modalRef}
           >
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
               {reviewStepCopy.modalEyebrow}

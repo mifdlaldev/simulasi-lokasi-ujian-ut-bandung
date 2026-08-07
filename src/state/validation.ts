@@ -1,3 +1,4 @@
+import { validationCopy } from "../content/copy";
 import { examLocations, examRegions } from "../data/examLocations";
 import type { StudentIdentity } from "../types/location";
 import type {
@@ -20,34 +21,34 @@ function validateStudentIdentity(
   const phone = identity.phone.trim();
 
   if (!nim) {
-    errors.nim = "NIM wajib diisi.";
+    errors.nim = validationCopy.nimRequired;
   } else if (!/^\d+$/.test(nim)) {
-    errors.nim = "NIM hanya boleh berisi angka.";
+    errors.nim = validationCopy.nimDigitsOnly;
   } else if (nim.length !== 9) {
-    errors.nim = "NIM harus terdiri dari 9 digit angka.";
+    errors.nim = validationCopy.nimLength;
   }
 
   if (!hasText(identity.name)) {
-    errors.name = "Nama mahasiswa wajib diisi.";
+    errors.name = validationCopy.nameRequired;
   }
 
   if (!hasText(identity.programStudy)) {
-    errors.programStudy = "Program studi wajib diisi.";
+    errors.programStudy = validationCopy.programStudyRequired;
   }
 
   if (phone && !/^\d+$/.test(phone)) {
-    errors.phone = "Nomor HP hanya boleh berisi angka.";
+    errors.phone = validationCopy.phoneDigitsOnly;
   } else if (phone.length > 12) {
-    errors.phone = "Nomor HP maksimal 12 digit.";
+    errors.phone = validationCopy.phoneMaxLength;
   }
 
   if (email && !/^[^\s@]+@gmail\.com$/i.test(email)) {
-    errors.email = "Email harus menggunakan alamat Gmail, contoh nama@gmail.com.";
+    errors.email = validationCopy.emailInvalid;
   }
 
   if (!email && !phone) {
-    errors.email = "Isi email atau nomor HP sebagai kontak.";
-    errors.phone = "Isi nomor HP atau email sebagai kontak.";
+    errors.email = validationCopy.contactRequiredEmail;
+    errors.phone = validationCopy.contactRequiredPhone;
   }
 
   return errors;
@@ -64,7 +65,7 @@ export function canContinueFromStep(
     return {
       canContinue: false,
       identityErrors,
-      stepError: "Lengkapi identitas mahasiswa terlebih dahulu.",
+      stepError: validationCopy.identityIncomplete,
     };
   }
 
@@ -72,7 +73,7 @@ export function canContinueFromStep(
     return {
       canContinue: false,
       identityErrors: {},
-      stepError: "Pilih kabupaten/kota wilayah ujian terlebih dahulu.",
+      stepError: validationCopy.regionRequired,
     };
   }
 
@@ -90,7 +91,7 @@ export function canContinueFromStep(
       return {
         canContinue: false,
         identityErrors: {},
-        stepError: `Semua lokasi ujian di ${selectedRegion?.name ?? "wilayah ini"} sudah penuh. Silakan pilih wilayah terdekat lain.`,
+        stepError: validationCopy.regionFull(selectedRegion?.name ?? "wilayah ini"),
       };
     }
 
@@ -102,7 +103,7 @@ export function canContinueFromStep(
       return {
         canContinue: false,
         identityErrors: {},
-        stepError: "Lokasi ujian yang dipilih sudah penuh. Silakan pilih lokasi lain.",
+        stepError: validationCopy.selectedLocationFull,
       };
     }
   }
@@ -111,7 +112,7 @@ export function canContinueFromStep(
     return {
       canContinue: false,
       identityErrors: {},
-      stepError: "Pilih sekolah lokasi ujian terlebih dahulu.",
+      stepError: validationCopy.locationRequired,
     };
   }
 
@@ -119,7 +120,7 @@ export function canContinueFromStep(
     return {
       canContinue: false,
       identityErrors: {},
-      stepError: "Detail lokasi membutuhkan pilihan sekolah ujian.",
+      stepError: validationCopy.detailRequiresLocation,
     };
   }
 
@@ -127,7 +128,7 @@ export function canContinueFromStep(
     return {
       canContinue: false,
       identityErrors: {},
-      stepError: "Centang pernyataan sebelum konfirmasi final.",
+      stepError: validationCopy.acknowledgementRequired,
     };
   }
 

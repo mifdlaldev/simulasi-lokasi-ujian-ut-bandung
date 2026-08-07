@@ -17,7 +17,9 @@ dan versioning mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 
 ### Diubah
 
-- Semua string UI tersentral ke `src/content/copy.ts` (sebelumnya ~70 string tersebar di komponen).
+- Tambah `tsconfig.json` + script `npm run typecheck` (`tsc --noEmit`) — type-check kini jadi bagian pipeline, tidak lagi hanya andalkan editor.
+- Semua string UI tersentral ke `src/content/copy.ts` (sebelumnya ~70 string tersebar di komponen; kini termasuk pesan validasi di `src/state/validation.ts`).
+- Dialog & lightbox dapat focus management (`src/hooks/useDialogFocus.ts`): focus pindah ke dialog saat buka, trap Tab, kembali ke pemicu saat tutup.
 - `.gitignore` diperluas; direktori artefak agent (`.omo/`, `.sisyphus/`) di-untrack dari git.
 - `src/utils/cx.ts` dan `src/components/ui/SummaryItem.tsx` dijadikan komponen bersama (menghapus duplikasi).
 - Data dummy `SMAN 5 Bandung` diperbaiki (alamat/koordinat sebelumnya menyalin SMAN 3 Bandung).

@@ -20,7 +20,7 @@ export function LocationSelectionStep({
   onSelectLocation,
   selectedLocationId,
   selectedRegionId,
-  selectedRegionName = "wilayah yang dipilih",
+  selectedRegionName = locationStepCopy.fallbackRegionName,
 }: LocationSelectionStepProps) {
   const filteredLocations = useMemo(
     () => locations.filter((location) => location.regionId === selectedRegionId),

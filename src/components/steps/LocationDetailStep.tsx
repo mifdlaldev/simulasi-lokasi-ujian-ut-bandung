@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { detailStepCopy } from "../../content/copy";
+import { useDialogFocus } from "../../hooks/useDialogFocus";
 import type { ExamLocation } from "../../types/location";
 import { MapPreview } from "../location/MapPreview";
 
@@ -12,6 +13,7 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
   const photoUrls = location ? [location.photoUrl, ...location.galleryPhotoUrls] : [];
   const [previewPhotoIndex, setPreviewPhotoIndex] = useState<number | null>(null);
   const previewPhotoUrl = previewPhotoIndex === null ? null : photoUrls[previewPhotoIndex];
+  const lightboxRef = useDialogFocus<HTMLDivElement>(previewPhotoIndex !== null);
 
   useEffect(() => {
     if (previewPhotoIndex === null || photoUrls.length === 0) {
@@ -41,7 +43,7 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
     return () => {
       window.removeEventListener("keydown", handlePreviewShortcut);
     };
-  }, [photoUrls.length, previewPhotoIndex]);
+  }, [photoUrls.length]);
 
   if (!location) {
     return (
@@ -137,6 +139,7 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(3,22,50,0.82)] p-4 backdrop-blur-sm"
           onClick={() => setPreviewPhotoIndex(null)}
+          ref={lightboxRef}
           role="dialog"
         >
           <div className="w-full max-w-5xl" onClick={(event) => event.stopPropagation()}>
