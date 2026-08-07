@@ -1,8 +1,8 @@
 # AGENTS.md — Pedoman Agen AI
 
-**Branch:** `develop`
-**Commit:** `de00357`
-**Terakhir diperbarui:** 2026-08-07
+**Branch:** `main`
+**Commit:** `5b6c38f`
+**Terakhir diperbarui:** 2026-08-08
 
 Dokumen ini wajib dibaca agen AI sebelum menyentuh repo ini. Pelanggaran aturan di bawah = hasil kerja ditolak.
 
@@ -96,6 +96,6 @@ npm run preview -- --host 127.0.0.1
 - Repo tanpa `tsconfig.json` — type-check via editor/`vite build` (esbuild).
 - Tanpa automated test. Verifikasi = `npm run build` + smoke check manual/browser.
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
-- Branch aktif: `develop`. `main` disinkronkan dari `develop` lewat merge setelah setiap batch perubahan — cek `git log main..develop` sebelum berasumsi sinkron.
+- Branch aktif: `main` (single branch). Semua perubahan langsung di-commit ke `main` dan di-push — tidak ada branch lain.
 - Lisensi: Apache-2.0 (`LICENSE`).
 - Verifikasi agent dicatat lokal di `.sisyphus/evidence/` / `.omo/evidence/` (folder di-ignore git, tidak di-commit). Hanya tulis hasil verifikasi sungguhan (lihat Aturan Utama #5).
