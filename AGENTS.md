@@ -100,6 +100,7 @@ npm run preview -- --host 127.0.0.1
 - Type-check via `npm run typecheck` (`tsc --noEmit`, `tsconfig.json`). Perhatikan: `vite build` (esbuild) TIDAK mengecek tipe — selalu jalankan `typecheck` sebelum push.
 - Automated test: unit test Vitest untuk pure functions (`src/state/*.test.ts`). Tanpa e2e/component test. Verifikasi penuh sebelum push: `typecheck` + `lint` + `test` + `build` + smoke check manual/browser.
 - CI: GitHub Actions `.github/workflows/ci.yml` — quality gate otomatis (typecheck, lint, test, build) tiap push/PR ke `main`. Deployment live via Vercel (di luar repo).
+- Branch protection `main`: required status checks (CI) aktif, `enforce_admins` off — pemilik repo tetap bisa push langsung tanpa PR.
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
 - Branch aktif: `main` (single branch). Semua perubahan langsung di-commit ke `main` dan di-push — tidak ada branch lain.
 - Lisensi: Apache-2.0 (`LICENSE`).
