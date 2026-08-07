@@ -114,6 +114,8 @@ docs/screenshots/         # tangkapan layar alur wizard
 |----------|-----------|
 | `npm run dev` | Jalankan server development (host `127.0.0.1`) |
 | `npm run typecheck` | Type-check TypeScript (`tsc --noEmit`) |
+| `npm run lint` | Lint kode dengan ESLint |
+| `npm run test` | Jalankan unit test Vitest |
 | `npm run build` | Build versi produksi ke `dist/` |
 | `npm run preview` | Preview hasil build secara lokal |
 

@@ -79,8 +79,8 @@ src/
 - Menambah backend, database, autentikasi, admin panel, mutasi kuota, notifikasi, integrasi data resmi UT. **Di luar scope prototype** (guardrail dari rencana awal).
 - Menganggap kuota bisa berubah runtime. Kuota = data statis dummy.
 - Klaim `mapUrl` butuh API key. `MapPreview` pakai embed OpenStreetMap tanpa key; `mapUrl` tautan Google Maps biasa.
-- Menambah automated test framework tanpa persetujuan user. README "Catatan Testing" menyatakan ini disengaja.
-- Menyebut `tsconfig.json`/eslint/CI ada. **Tidak ada di repo.**
+- Menambah tooling/dependency baru (test framework, linter, library) tanpa persetujuan eksplisit user. Tooling yang SUDAH disetujui: Vitest (unit test pure functions) + ESLint.
+- Menyebut CI/CD ada. **Tidak ada di repo.** (`tsconfig.json` dan `eslint.config.js` ADA — pakai `npm run typecheck` dan `npm run lint`.)
 - Memperlakukan data dummy sebagai data resmi UT.
 
 ## 7. COMMANDS
@@ -89,6 +89,8 @@ src/
 npm install                     # install dependency
 npm run dev                     # dev server (host 127.0.0.1)
 npm run typecheck               # type-check via tsc --noEmit (tsconfig.json)
+npm run lint                    # lint via ESLint (eslint.config.js)
+npm run test                    # unit test via Vitest (src/state/*.test.ts)
 npm run build                   # build produksi — WAJIB dijalankan untuk verifikasi
 npm run preview -- --host 127.0.0.1
 ```
@@ -96,7 +98,7 @@ npm run preview -- --host 127.0.0.1
 ## 8. NOTES / GOTCHAS
 
 - Type-check via `npm run typecheck` (`tsc --noEmit`, `tsconfig.json`). Perhatikan: `vite build` (esbuild) TIDAK mengecek tipe — selalu jalankan `typecheck` sebelum push.
-- Tanpa automated test. Verifikasi = `npm run build` + smoke check manual/browser.
+- Automated test: unit test Vitest untuk pure functions (`src/state/*.test.ts`). Tanpa e2e/component test. Verifikasi penuh sebelum push: `typecheck` + `lint` + `test` + `build` + smoke check manual/browser.
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
 - Branch aktif: `main` (single branch). Semua perubahan langsung di-commit ke `main` dan di-push — tidak ada branch lain.
 - Lisensi: Apache-2.0 (`LICENSE`).

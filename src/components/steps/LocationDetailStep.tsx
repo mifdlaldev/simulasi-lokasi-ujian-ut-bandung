@@ -14,9 +14,10 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
   const [previewPhotoIndex, setPreviewPhotoIndex] = useState<number | null>(null);
   const previewPhotoUrl = previewPhotoIndex === null ? null : photoUrls[previewPhotoIndex];
   const lightboxRef = useDialogFocus<HTMLDivElement>(previewPhotoIndex !== null);
+  const isLightboxOpen = previewPhotoIndex !== null;
 
   useEffect(() => {
-    if (previewPhotoIndex === null || photoUrls.length === 0) {
+    if (!isLightboxOpen || photoUrls.length === 0) {
       return;
     }
 
@@ -43,7 +44,7 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
     return () => {
       window.removeEventListener("keydown", handlePreviewShortcut);
     };
-  }, [photoUrls.length]);
+  }, [isLightboxOpen, photoUrls.length]);
 
   if (!location) {
     return (

@@ -18,6 +18,8 @@ dan versioning mengikuti [Semantic Versioning](https://semver.org/lang/id/).
 ### Diubah
 
 - Tambah `tsconfig.json` + script `npm run typecheck` (`tsc --noEmit`) — type-check kini jadi bagian pipeline, tidak lagi hanya andalkan editor.
+- Tambah ESLint (`eslint.config.js`, flat config + typescript-eslint + react-hooks) + script `npm run lint`.
+- Tambah unit test Vitest untuk `src/state/validation.ts` dan `src/state/wizardReducer.ts` (28 kasus) + script `npm run test`.
 - Semua string UI tersentral ke `src/content/copy.ts` (sebelumnya ~70 string tersebar di komponen; kini termasuk pesan validasi di `src/state/validation.ts`).
 - Dialog & lightbox dapat focus management (`src/hooks/useDialogFocus.ts`): focus pindah ke dialog saat buka, trap Tab, kembali ke pemicu saat tutup.
 - `.gitignore` diperluas; direktori artefak agent (`.omo/`, `.sisyphus/`) di-untrack dari git.
