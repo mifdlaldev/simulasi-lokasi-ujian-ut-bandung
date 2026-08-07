@@ -97,5 +97,5 @@ npm run preview -- --host 127.0.0.1
 - Tanpa automated test. Verifikasi = `npm run build` + smoke check manual/browser.
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
 - Branch aktif: `develop`. Branch `main` tertinggal (tidak up-to-date) — jangan asumsikan `main` = kode terbaru.
-- Tanpa license file di repo.
+- Lisensi: Apache-2.0 (`LICENSE`).
 - Verifikasi agent dicatat lokal di `.sisyphus/evidence/` / `.omo/evidence/` (folder di-ignore git, tidak di-commit). Hanya tulis hasil verifikasi sungguhan (lihat Aturan Utama #5).
