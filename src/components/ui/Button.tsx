@@ -1,14 +1,12 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
+import { cx } from "../../utils/cx";
+
 type ButtonVariant = "primary" | "secondary";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: ButtonVariant;
-}
-
-function cx(...classes: Array<string | false | undefined>): string {
-  return classes.filter(Boolean).join(" ");
 }
 
 const baseClassName =

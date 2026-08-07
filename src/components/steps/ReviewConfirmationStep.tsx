@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { appCopy, reviewStepCopy } from "../../content/copy";
 import type { ExamLocation, ExamRegion, StudentIdentity } from "../../types/location";
 import { Button } from "../ui/Button";
+import { SummaryItem } from "../ui/SummaryItem";
 
 export interface ReviewConfirmationStepProps {
   acknowledgementAccepted: boolean;
@@ -10,15 +11,6 @@ export interface ReviewConfirmationStepProps {
   onAcknowledgementChange: (accepted: boolean) => void;
   onConfirm: () => void;
   region: ExamRegion | null;
-}
-
-function SummaryRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-[var(--ut-border)] bg-white px-4 py-3">
-      <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ut-muted)]">{label}</dt>
-      <dd className="mt-1 text-sm font-semibold text-[var(--ut-blue-deep)]">{value || reviewStepCopy.valueFallback}</dd>
-    </div>
-  );
 }
 
 export function ReviewConfirmationStep({
@@ -57,17 +49,14 @@ export function ReviewConfirmationStep({
   return (
     <div className="space-y-6">
       <dl className="grid gap-3 sm:grid-cols-2">
-        <SummaryRow label={reviewStepCopy.rows.nim} value={identity.nim} />
-        <SummaryRow label={reviewStepCopy.rows.name} value={identity.name} />
-        <SummaryRow label={reviewStepCopy.rows.programStudy} value={identity.programStudy} />
-        <SummaryRow label={reviewStepCopy.rows.contact} value={identity.email || identity.phone} />
-        <SummaryRow label={reviewStepCopy.rows.region} value={region?.name ?? ""} />
-        <SummaryRow label={reviewStepCopy.rows.school} value={location?.schoolName ?? ""} />
-        <SummaryRow label={reviewStepCopy.rows.examDate} value={location?.examDate ?? ""} />
-        <SummaryRow
-          label={reviewStepCopy.rows.quota}
-          value={location ? reviewStepCopy.quotaValue(location.availableRooms) : ""}
-        />
+        <SummaryItem label={reviewStepCopy.rows.nim} value={identity.nim} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.name} value={identity.name} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.programStudy} value={identity.programStudy} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.contact} value={identity.email || identity.phone} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.region} value={region?.name ?? ""} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.school} value={location?.schoolName ?? ""} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.examDate} value={location?.examDate ?? ""} valueFallback={reviewStepCopy.valueFallback} />
+        <SummaryItem label={reviewStepCopy.rows.quota} value={location ? reviewStepCopy.quotaValue(location.availableRooms) : ""} valueFallback={reviewStepCopy.valueFallback} />
       </dl>
 
       <section className="rounded-[1.5rem] border border-[var(--ut-border)] bg-[var(--ut-surface)] p-5">

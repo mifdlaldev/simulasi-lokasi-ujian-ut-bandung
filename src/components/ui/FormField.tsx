@@ -2,6 +2,7 @@ import { cloneElement, isValidElement } from "react";
 import type { ReactElement, ReactNode } from "react";
 
 import { wizardCopy } from "../../content/copy";
+import { cx } from "../../utils/cx";
 
 interface FormFieldControlProps {
   id?: string;
@@ -17,10 +18,6 @@ export interface FormFieldProps {
   error?: string;
   helperText?: ReactNode;
   required?: boolean;
-}
-
-function cx(...classes: Array<string | false | undefined>): string {
-  return classes.filter(Boolean).join(" ");
 }
 
 const controlClassName =

@@ -89,7 +89,7 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
       </figure>
 
       <div className="space-y-5">
-        <section className="rounded-[1.75rem] border border-[var(--ut-border)] bg-white p-5 shadow-[0_14px_32px_rgba(16,32,51,0.08)]">
+        <section className="rounded-[1.75rem] border border-[var(--ut-border)] bg-white p-5 shadow-[var(--ut-shadow-soft)]">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
             {detailStepCopy.sectionTitle}
           </p>
@@ -117,7 +117,7 @@ export function LocationDetailStep({ location }: LocationDetailStepProps) {
           </dl>
         </section>
 
-        <section className="rounded-[1.75rem] border border-[var(--ut-border)] bg-white p-5 shadow-[0_14px_32px_rgba(16,32,51,0.08)]">
+        <section className="rounded-[1.75rem] border border-[var(--ut-border)] bg-white p-5 shadow-[var(--ut-shadow-soft)]">
           <h3 className="text-lg font-bold text-[var(--ut-blue-deep)]">{detailStepCopy.addressTitle}</h3>
           <p className="mt-2 text-base leading-7 text-[var(--ut-muted)]">{location.address}</p>
         </section>

@@ -25,7 +25,7 @@ export function MapPreview({ address, label, latitude, longitude, mapUrl }: MapP
   const openStreetMapEmbedUrl = createOpenStreetMapEmbedUrl(latitude, longitude);
 
   return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-[var(--ut-border)] bg-white shadow-[0_14px_32px_rgba(16,32,51,0.08)]">
+    <div className="overflow-hidden rounded-[1.5rem] border border-[var(--ut-border)] bg-white shadow-[var(--ut-shadow-soft)]">
       <iframe
         className="h-72 w-full border-0"
         loading="lazy"
