@@ -80,7 +80,7 @@ src/
 - Menganggap kuota bisa berubah runtime. Kuota = data statis dummy.
 - Klaim `mapUrl` butuh API key. `MapPreview` pakai embed OpenStreetMap tanpa key; `mapUrl` tautan Google Maps biasa.
 - Menambah tooling/dependency baru (test framework, linter, library) tanpa persetujuan eksplisit user. Tooling yang SUDAH disetujui: Vitest (unit test pure functions) + ESLint.
-- Menyebut CI/CD ada. **Tidak ada di repo.** (`tsconfig.json` dan `eslint.config.js` ADA — pakai `npm run typecheck` dan `npm run lint`.)
+- Menganggap CI menjalankan e2e/visual test. CI (`.github/workflows/ci.yml`) hanya quality gate: `npm ci` → `typecheck` → `lint` → `test` → `build` — tanpa e2e/component test.
 - Memperlakukan data dummy sebagai data resmi UT.
 
 ## 7. COMMANDS
@@ -99,6 +99,7 @@ npm run preview -- --host 127.0.0.1
 
 - Type-check via `npm run typecheck` (`tsc --noEmit`, `tsconfig.json`). Perhatikan: `vite build` (esbuild) TIDAK mengecek tipe — selalu jalankan `typecheck` sebelum push.
 - Automated test: unit test Vitest untuk pure functions (`src/state/*.test.ts`). Tanpa e2e/component test. Verifikasi penuh sebelum push: `typecheck` + `lint` + `test` + `build` + smoke check manual/browser.
+- CI: GitHub Actions `.github/workflows/ci.yml` — quality gate otomatis (typecheck, lint, test, build) tiap push/PR ke `main`. Deployment live via Vercel (di luar repo).
 - `src/data/examLocations.ts`: `photoUrl` file lokal di `public/`, `mapUrl` tanpa API key, `regionId` harus cocok dengan `id` di `examRegions`.
 - Branch aktif: `main` (single branch). Semua perubahan langsung di-commit ke `main` dan di-push — tidak ada branch lain.
 - Lisensi: Apache-2.0 (`LICENSE`).

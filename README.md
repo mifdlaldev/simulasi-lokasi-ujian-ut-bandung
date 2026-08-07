@@ -9,6 +9,7 @@
   <img src="https://img.shields.io/badge/React-19-61dafb.svg" alt="React 19">
   <img src="https://img.shields.io/badge/Vite-7-646cff.svg" alt="Vite 7">
   <img src="https://img.shields.io/badge/TypeScript-5.8-3178c6.svg" alt="TypeScript 5.8">
+  <img src="https://img.shields.io/github/actions/workflow/status/mifdlaldev/simulasi-lokasi-ujian-ut-bandung/ci.yml?branch=main&label=CI&logo=github&logoColor=white" alt="CI">
 </p>
 
 <p align="center"><em>Prototype simulasi alur pemilihan lokasi ujian untuk mahasiswa Universitas Terbuka Bandung.</em></p>
@@ -118,6 +119,10 @@ docs/screenshots/         # tangkapan layar alur wizard
 | `npm run test` | Jalankan unit test Vitest |
 | `npm run build` | Build versi produksi ke `dist/` |
 | `npm run preview` | Preview hasil build secara lokal |
+
+## CI/CD
+
+Setiap push atau pull request ke `main` memicu **GitHub Actions** (`.github/workflows/ci.yml`) yang menjalankan quality gate: `npm ci` → `npm run typecheck` → `npm run lint` → `npm run test` → `npm run build`. Deployment live dikelola terpisah di Vercel.
 
 ## Data Dummy
 
