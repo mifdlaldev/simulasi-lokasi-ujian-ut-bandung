@@ -60,6 +60,21 @@ Untuk mengganti data dummy:
 
 Sesuai preferensi awal, project ini tidak menambahkan setup automated testing pada fase development awal. Verifikasi dilakukan lewat build dan smoke check manual/browser. Testing otomatis atau debugging lanjutan bisa ditambahkan nanti jika diminta.
 
+## Pedoman untuk Agen AI
+
+Repo ini memakai **AGENTS.md** sebagai pedoman wajib bagi agen AI (Copilot, Cursor, Claude, OpenCode, dsb.) sebelum mengerjakan kode di repo ini.
+
+**Aturan utama: AI DILARANG HALUSINASI.** Ringkasan:
+
+- Setiap klaim tentang kode/data/fitur wajib berdasar pembacaan file aktual. Dilarang menebak atau mengarang.
+- Dilarang mengklaim fitur yang tidak ada di codebase (backend, database, autentikasi, admin panel, mutasi kuota, integrasi resmi UT — semuanya **tidak ada**).
+- Dilarang mengklaim build/test lulus tanpa benar-benar menjalankan `npm run build`.
+- Dilarang mengarang hasil verifikasi atau catatan evidence.
+- Dilarang menambah dependency/integrasi eksternal tanpa konfirmasi user.
+- Jika tidak yakin → baca file. Jika tidak ada → nyatakan "tidak ada / tidak ditemukan di codebase".
+
+Baca `AGENTS.md` untuk aturan lengkap, peta struktur, konvensi, dan anti-pattern proyek ini.
+
 ## Struktur Penting
 
 - `src/App.tsx` — orkestrasi wizard dan navigasi langkah.
