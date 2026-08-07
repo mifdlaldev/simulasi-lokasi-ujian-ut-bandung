@@ -89,8 +89,8 @@ docs/screenshots/         # tangkapan layar alur wizard
 1. Clone repositori:
 
    ```bash
-   git clone https://github.com/mifdlaldev/Simulasi-Pemilihan-Lokasi-Ujian-UT-Bandung.git
-   cd Simulasi-Pemilihan-Lokasi-Ujian-UT-Bandung
+   git clone https://github.com/mifdlaldev/simulasi-lokasi-ujian-ut-bandung.git
+   cd simulasi-lokasi-ujian-ut-bandung
    ```
 
 2. Install dependency:
