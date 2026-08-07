@@ -1,4 +1,4 @@
-import { appCopy } from "../../content/copy";
+import { appCopy, successStepCopy } from "../../content/copy";
 import { Button } from "../ui/Button";
 
 export interface SuccessStepProps {
@@ -20,17 +20,16 @@ export function SuccessStep({ onReset, selectedSchoolName }: SuccessStepProps) {
       </p>
       {selectedSchoolName ? (
         <p className="mx-auto mt-4 w-fit rounded-2xl bg-[var(--ut-blue-soft)] px-5 py-3 text-sm font-bold text-[var(--ut-blue-deep)]">
-          Lokasi yang dipilih: {selectedSchoolName}
+          {successStepCopy.selectedLocationPrefix} {selectedSchoolName}
         </p>
       ) : null}
       <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-[var(--ut-muted)]">
-        Simpan ringkasan ini sebagai gambaran alur prototype. Data belum masuk ke sistem resmi
-        Universitas Terbuka.
+        {successStepCopy.footnote}
       </p>
       {onReset ? (
         <div className="mt-7 flex justify-center">
           <Button onClick={onReset} variant="secondary">
-            Ulangi Simulasi
+            {successStepCopy.resetButton}
           </Button>
         </div>
       ) : null}

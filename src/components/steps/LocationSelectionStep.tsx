@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import { locationStepCopy } from "../../content/copy";
 import type { ExamLocation } from "../../types/location";
 import { getEstimatedSeatCount } from "../../utils/quota";
 import { LocationCard } from "../location/LocationCard";
@@ -37,7 +38,7 @@ export function LocationSelectionStep({
   if (!selectedRegionId) {
     return (
       <p className="rounded-2xl border border-dashed border-[var(--ut-border-strong)] bg-white px-5 py-6 text-[var(--ut-muted)]">
-        Pilih kabupaten/kota terlebih dahulu untuk melihat daftar sekolah lokasi ujian.
+        {locationStepCopy.noRegion}
       </p>
     );
   }
@@ -45,7 +46,7 @@ export function LocationSelectionStep({
   if (filteredLocations.length === 0) {
     return (
       <p className="rounded-2xl border border-dashed border-[var(--ut-border-strong)] bg-white px-5 py-6 text-[var(--ut-muted)]">
-        Belum ada lokasi ujian dummy untuk wilayah yang dipilih.
+        {locationStepCopy.noLocations}
       </p>
     );
   }
@@ -54,11 +55,11 @@ export function LocationSelectionStep({
     <div className="space-y-4">
       {availableRoomCount > 0 ? (
         <div className="rounded-2xl border border-[var(--ut-blue)] bg-[var(--ut-blue-soft)] px-4 py-3 text-sm leading-6 text-[var(--ut-blue-deep)]">
-          <strong>{selectedRegionName}</strong> memiliki {availableLocationCount} lokasi, {availableRoomCount} ruang, dan ±{estimatedSeatCount} kursi tersedia.
+          {locationStepCopy.availability(selectedRegionName, availableLocationCount, availableRoomCount, estimatedSeatCount)}
         </div>
       ) : (
         <div className="rounded-2xl border border-[var(--ut-danger)] bg-red-50 px-4 py-3 text-sm leading-6 text-[var(--ut-danger)]" role="status">
-          <strong>Kuota penuh.</strong> Semua lokasi ujian di {selectedRegionName} sudah penuh. Silakan kembali dan pilih wilayah terdekat lain.
+          {locationStepCopy.quotaFull(selectedRegionName)}
         </div>
       )}
       {error ? (

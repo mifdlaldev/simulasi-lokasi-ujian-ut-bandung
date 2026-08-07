@@ -11,7 +11,7 @@ import { RegionSearchStep } from "./components/steps/RegionSearchStep";
 import { ReviewConfirmationStep } from "./components/steps/ReviewConfirmationStep";
 import { StudentIdentityStep } from "./components/steps/StudentIdentityStep";
 import { SuccessStep } from "./components/steps/SuccessStep";
-import { appCopy, stepLabels } from "./content/copy";
+import { appCopy, stepLabels, wizardCopy } from "./content/copy";
 import { examLocations, examRegions } from "./data/examLocations";
 import {
   getNextStep,
@@ -170,10 +170,10 @@ export default function App() {
     <>
       {!isFirstStep ? (
         <Button onClick={goToPreviousStep} variant="secondary">
-          Kembali
+          {wizardCopy.back}
         </Button>
       ) : null}
-      {!isReviewStep ? <Button onClick={goToNextStep}>Lanjutkan</Button> : null}
+      {!isReviewStep ? <Button onClick={goToNextStep}>{wizardCopy.next}</Button> : null}
     </>
   );
 

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 
+import { identityStepCopy, wizardCopy } from "../../content/copy";
 import { programStudyGroups } from "../../data/programStudies";
 import type { StudentIdentity } from "../../types/location";
 import type { StudentIdentityErrors } from "../../types/wizard";
@@ -81,9 +82,9 @@ export function StudentIdentityStep({
   );
   const programStudyStatusText = hasProgramStudyQuery
     ? filteredProgramStudyCount > 0
-      ? `${filteredProgramStudyCount} program studi ditemukan.`
-      : "Tidak ada program studi yang cocok dengan kata kunci tersebut."
-    : `${filteredProgramStudyGroups.length} fakultas tersedia. Buka fakultas untuk melihat program studi.`;
+      ? identityStepCopy.statusFound(filteredProgramStudyCount)
+      : identityStepCopy.statusNone
+    : identityStepCopy.statusFaculties(filteredProgramStudyGroups.length);
 
   const programStudyHelperId = "student-program-study-helper";
   const programStudyErrorId = errors.programStudy
@@ -123,10 +124,10 @@ export function StudentIdentityStep({
     <div className="grid gap-5 sm:grid-cols-2">
       <FormField
         id="student-nim"
-        label="NIM"
+        label={identityStepCopy.nim.label}
         required
         error={errors.nim}
-        helperText="Masukkan NIM 9 digit sesuai data akademik UT."
+        helperText={identityStepCopy.nim.helper}
       >
         <input
           autoComplete="off"
@@ -139,23 +140,23 @@ export function StudentIdentityStep({
             )
           }
           pattern="[0-9]{9}"
-          placeholder="Contoh: 042123456"
+          placeholder={identityStepCopy.nim.placeholder}
           value={value.nim}
         />
       </FormField>
 
       <FormField
         id="student-name"
-        label="Nama Mahasiswa"
+        label={identityStepCopy.name.label}
         required
         error={errors.name}
-        helperText="Gunakan nama lengkap untuk memudahkan pengecekan simulasi."
+        helperText={identityStepCopy.name.helper}
       >
         <input
           autoComplete="name"
           name="name"
           onChange={(event) => updateField("name", event.target.value)}
-          placeholder="Nama lengkap"
+          placeholder={identityStepCopy.name.placeholder}
           value={value.name}
         />
       </FormField>
@@ -166,9 +167,9 @@ export function StudentIdentityStep({
             className="block text-sm font-semibold text-[var(--ut-blue-deep)]"
             htmlFor="student-program-study-search"
           >
-            Program Studi
+            {identityStepCopy.programStudy.label}
             <span aria-hidden="true"> *</span>
-            <span className="ut-sr-only"> wajib diisi</span>
+            <span className="ut-sr-only">{wizardCopy.requiredSrOnly}</span>
           </label>
           <input
             aria-controls="student-program-study-results"
@@ -184,7 +185,7 @@ export function StudentIdentityStep({
             id="student-program-study-search"
             name="programStudySearch"
             onChange={(event) => setProgramStudyQuery(event.target.value)}
-            placeholder="Cari Manajemen, PGSD, Sistem Informasi..."
+            placeholder={identityStepCopy.programStudy.searchPlaceholder}
             type="search"
             value={programStudyQuery}
           />
@@ -192,8 +193,7 @@ export function StudentIdentityStep({
             className="text-sm leading-6 text-[var(--ut-muted)]"
             id={programStudyHelperId}
           >
-            Ketik nama program studi/fakultas, atau buka fakultas untuk melihat
-            daftar prodi.
+            {identityStepCopy.programStudy.helper}
           </p>
           <p
             className="text-sm leading-6 text-[var(--ut-muted)]"
@@ -215,7 +215,7 @@ export function StudentIdentityStep({
 
         {selectedProgramStudy ? (
           <div className="rounded-2xl border border-[var(--ut-blue)] bg-[var(--ut-blue-soft)] px-4 py-3 text-sm leading-6 text-[var(--ut-blue-deep)]">
-            Program terpilih:{" "}
+            {identityStepCopy.selectedPrefix}{" "}
             <strong>{selectedProgramStudy.program.name}</strong>
             <span className="ml-2 inline-flex rounded-full bg-white px-2 py-0.5 text-xs font-bold text-[var(--ut-blue)]">
               {selectedProgramStudy.facultyCode}
@@ -226,7 +226,7 @@ export function StudentIdentityStep({
         <div
           className="grid gap-4"
           id="student-program-study-results"
-          aria-label="Hasil pencarian program studi berdasarkan fakultas"
+          aria-label={identityStepCopy.programStudy.ariaResults}
         >
           {filteredProgramStudyGroups.length > 0 ? (
             filteredProgramStudyGroups.map((group) => {
@@ -255,11 +255,11 @@ export function StudentIdentityStep({
                         {group.facultyName}
                       </span>
                       <span className="text-xs font-semibold text-[var(--ut-muted)]">
-                        {group.programs.length} prodi
+                        {identityStepCopy.prodiCount(group.programs.length)}
                       </span>
                     </span>
                     <span className="shrink-0 rounded-full border border-[var(--ut-border)] bg-white px-3 py-1 text-xs font-bold text-[var(--ut-blue)]">
-                      {expanded ? "Tutup" : "Buka"}
+                      {expanded ? identityStepCopy.collapse : identityStepCopy.expand}
                     </span>
                   </button>
 
@@ -294,8 +294,8 @@ export function StudentIdentityStep({
                               }
                             >
                               {selected
-                                ? "Terpilih"
-                                : `Pilih ${group.facultyCode}`}
+                                ? identityStepCopy.selectedLabel
+                                : identityStepCopy.selectPrompt(group.facultyCode)}
                             </span>
                           </button>
                         );
@@ -307,8 +307,7 @@ export function StudentIdentityStep({
             })
           ) : (
             <p className="rounded-2xl border border-dashed border-[var(--ut-border-strong)] bg-white px-4 py-5 text-sm text-[var(--ut-muted)]">
-              Program studi tidak ditemukan. Coba kata kunci lain seperti
-              Manajemen, PGSD, Sistem Informasi, atau FKIP.
+              {identityStepCopy.emptyResults}
             </p>
           )}
         </div>
@@ -316,17 +315,17 @@ export function StudentIdentityStep({
 
       <FormField
         id="student-email"
-        label="Email"
+        label={identityStepCopy.email.label}
         required
         error={errors.email}
-        helperText="Masukkan alamat Gmail aktif."
+        helperText={identityStepCopy.email.helper}
       >
         <input
           autoComplete="email"
           name="email"
           onChange={(event) => updateField("email", event.target.value)}
           pattern="^[^\s@]+@gmail\.com$"
-          placeholder="nama@gmail.com"
+          placeholder={identityStepCopy.email.placeholder}
           type="email"
           value={value.email}
         />
@@ -334,10 +333,10 @@ export function StudentIdentityStep({
 
       <FormField
         id="student-phone"
-        label="Nomor Telepon / HP"
+        label={identityStepCopy.phone.label}
         required
         error={errors.phone}
-        helperText="Masukkan nomor HP aktif, maksimal 12 digit."
+        helperText={identityStepCopy.phone.helper}
       >
         <input
           autoComplete="tel"
@@ -350,7 +349,7 @@ export function StudentIdentityStep({
             )
           }
           pattern="[0-9]{0,12}"
-          placeholder="081234567890"
+          placeholder={identityStepCopy.phone.placeholder}
           type="tel"
           value={value.phone}
         />

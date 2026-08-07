@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import { brandName } from "../../content/brand";
-import { appCopy } from "../../content/copy";
+import { appCopy, wizardCopy } from "../../content/copy";
 import { Stepper, type StepperItem } from "../ui/Stepper";
 
 export interface AppShellProps {
@@ -18,7 +18,7 @@ export function AppShell({ children, currentStepId, steps, summary }: AppShellPr
         className="ut-sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-[var(--ut-yellow)] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-[var(--ut-blue-deep)]"
         href="#wizard-content"
       >
-        Lewati ke isi wizard
+        {wizardCopy.skipToContent}
       </a>
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
         <header className="ut-official-card overflow-hidden rounded-[2rem] bg-[var(--ut-blue)] text-white">

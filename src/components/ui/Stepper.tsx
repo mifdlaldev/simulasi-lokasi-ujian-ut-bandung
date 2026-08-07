@@ -1,3 +1,5 @@
+import { stepperCopy } from "../../content/copy";
+
 export interface StepperItem {
   id: string;
   label: string;
@@ -27,7 +29,7 @@ export function Stepper({ currentStepId, steps }: StepperProps) {
   );
 
   return (
-    <nav aria-label="Tahapan pemilihan lokasi ujian">
+    <nav aria-label={stepperCopy.navLabel}>
       <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {steps.map((step, index) => {
           const state = getStepState(index, currentIndex);
@@ -39,7 +41,7 @@ export function Stepper({ currentStepId, steps }: StepperProps) {
               <div
                 className="flex min-h-14 items-center gap-3 rounded-2xl border border-[var(--ut-border)] bg-white px-4 py-3 shadow-[0_10px_24px_rgba(16,32,51,0.06)]"
                 aria-current={isCurrent ? "step" : undefined}
-                aria-label={`${step.label}: ${isCurrent ? "langkah aktif" : isCompleted ? "sudah selesai" : "belum dimulai"}`}
+                aria-label={`${step.label}: ${isCurrent ? stepperCopy.stateCurrent : isCompleted ? stepperCopy.stateCompleted : stepperCopy.stateUpcoming}`}
               >
                 <span
                   className={[
@@ -54,7 +56,7 @@ export function Stepper({ currentStepId, steps }: StepperProps) {
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--ut-muted)]">
-                    {isCurrent ? "Sedang berlangsung" : isCompleted ? "Selesai" : "Berikutnya"}
+                    {isCurrent ? stepperCopy.statusCurrent : isCompleted ? stepperCopy.statusCompleted : stepperCopy.statusUpcoming}
                   </span>
                   <span className="block truncate text-sm font-semibold text-[var(--ut-ink)]">
                     {step.label}

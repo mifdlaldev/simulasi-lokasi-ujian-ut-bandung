@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { appCopy } from "../../content/copy";
+import { appCopy, reviewStepCopy } from "../../content/copy";
 import type { ExamLocation, ExamRegion, StudentIdentity } from "../../types/location";
 import { Button } from "../ui/Button";
 
@@ -16,7 +16,7 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-[var(--ut-border)] bg-white px-4 py-3">
       <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ut-muted)]">{label}</dt>
-      <dd className="mt-1 text-sm font-semibold text-[var(--ut-blue-deep)]">{value || "Belum diisi"}</dd>
+      <dd className="mt-1 text-sm font-semibold text-[var(--ut-blue-deep)]">{value || reviewStepCopy.valueFallback}</dd>
     </div>
   );
 }
@@ -57,23 +57,23 @@ export function ReviewConfirmationStep({
   return (
     <div className="space-y-6">
       <dl className="grid gap-3 sm:grid-cols-2">
-        <SummaryRow label="NIM" value={identity.nim} />
-        <SummaryRow label="Nama Mahasiswa" value={identity.name} />
-        <SummaryRow label="Program Studi" value={identity.programStudy} />
-        <SummaryRow label="Kontak" value={identity.email || identity.phone} />
-        <SummaryRow label="Wilayah" value={region?.name ?? ""} />
-        <SummaryRow label="Sekolah Lokasi Ujian" value={location?.schoolName ?? ""} />
-        <SummaryRow label="Tanggal Ujian" value={location?.examDate ?? ""} />
+        <SummaryRow label={reviewStepCopy.rows.nim} value={identity.nim} />
+        <SummaryRow label={reviewStepCopy.rows.name} value={identity.name} />
+        <SummaryRow label={reviewStepCopy.rows.programStudy} value={identity.programStudy} />
+        <SummaryRow label={reviewStepCopy.rows.contact} value={identity.email || identity.phone} />
+        <SummaryRow label={reviewStepCopy.rows.region} value={region?.name ?? ""} />
+        <SummaryRow label={reviewStepCopy.rows.school} value={location?.schoolName ?? ""} />
+        <SummaryRow label={reviewStepCopy.rows.examDate} value={location?.examDate ?? ""} />
         <SummaryRow
-          label="Kuota Ruang"
-          value={location ? `${location.availableRooms} ruang tersedia` : ""}
+          label={reviewStepCopy.rows.quota}
+          value={location ? reviewStepCopy.quotaValue(location.availableRooms) : ""}
         />
       </dl>
 
       <section className="rounded-[1.5rem] border border-[var(--ut-border)] bg-[var(--ut-surface)] p-5">
-        <h3 className="text-lg font-bold text-[var(--ut-blue-deep)]">Alamat Lokasi</h3>
+        <h3 className="text-lg font-bold text-[var(--ut-blue-deep)]">{reviewStepCopy.addressTitle}</h3>
         <p className="mt-2 text-base leading-7 text-[var(--ut-muted)]">
-          {location?.address ?? "Belum ada sekolah lokasi ujian yang dipilih."}
+          {location?.address ?? reviewStepCopy.noLocationAddress}
         </p>
       </section>
 
@@ -88,7 +88,7 @@ export function ReviewConfirmationStep({
       </label>
       {!acknowledgementAccepted ? (
         <p className="-mt-3 text-sm font-medium leading-6 text-[var(--ut-danger)]">
-          Centang pernyataan untuk mengaktifkan tombol konfirmasi final.
+          {reviewStepCopy.checkboxHint}
         </p>
       ) : null}
 
@@ -97,7 +97,7 @@ export function ReviewConfirmationStep({
       </div>
 
       <Button className="w-full" disabled={!acknowledgementAccepted} onClick={() => setConfirmationModalOpen(true)}>
-        Konfirmasi Final Simulasi
+        {reviewStepCopy.confirmButton}
       </Button>
 
       {confirmationModalOpen ? (
@@ -114,25 +114,23 @@ export function ReviewConfirmationStep({
             onClick={(event) => event.stopPropagation()}
           >
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
-              Konfirmasi Akhir
+              {reviewStepCopy.modalEyebrow}
             </p>
             <h3 className="mt-2 text-2xl font-bold text-[var(--ut-blue-deep)]" id="final-confirmation-title">
-              Pastikan pilihan simulasi sudah sesuai
+              {reviewStepCopy.modalTitle}
             </h3>
             <p className="mt-3 text-sm leading-6 text-[var(--ut-muted)]" id="final-confirmation-description">
-              Anda akan menyelesaikan simulasi pemilihan lokasi ujian dengan sekolah, wilayah,
-              tanggal, kuota, alamat, foto, dan peta yang sudah ditinjau. Data ini masih bersifat
-              dummy untuk kebutuhan prototype.
+              {reviewStepCopy.modalDescription}
             </p>
 
             <dl className="mt-5 grid gap-3 rounded-[1.5rem] bg-[var(--ut-blue-soft)] p-4 text-sm text-[var(--ut-blue-deep)]">
               <div>
-                <dt className="font-semibold">Sekolah</dt>
-                <dd>{location?.schoolName ?? "Belum memilih sekolah"}</dd>
+                <dt className="font-semibold">{reviewStepCopy.modalSchool}</dt>
+                <dd>{location?.schoolName ?? reviewStepCopy.modalSchoolFallback}</dd>
               </div>
               <div>
-                <dt className="font-semibold">Tanggal Ujian</dt>
-                <dd>{location ? `${location.examDate} · ${location.examTime}` : "Belum memilih jadwal"}</dd>
+                <dt className="font-semibold">{reviewStepCopy.modalSchedule}</dt>
+                <dd>{location ? `${location.examDate} · ${location.examTime}` : reviewStepCopy.modalScheduleFallback}</dd>
               </div>
             </dl>
 
@@ -142,14 +140,14 @@ export function ReviewConfirmationStep({
                 onClick={() => setConfirmationModalOpen(false)}
                 type="button"
               >
-                Periksa Kembali
+                {reviewStepCopy.modalCancel}
               </button>
               <button
                 className="rounded-full bg-[var(--ut-blue)] px-5 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(0,80,158,0.22)] transition hover:bg-[var(--ut-blue-deep)] focus-visible:shadow-[var(--ut-focus-ring)]"
                 onClick={handleFinalConfirm}
                 type="button"
               >
-                Ya, Konfirmasi Sekarang
+                {reviewStepCopy.modalConfirm}
               </button>
             </div>
           </section>

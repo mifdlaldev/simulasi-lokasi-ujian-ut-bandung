@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { wizardCopy } from "../../content/copy";
+
 export interface WizardFrameProps {
   children: ReactNode;
   description?: ReactNode;
@@ -21,7 +23,7 @@ export function WizardFrame({
       <div className="p-5 sm:p-8 lg:p-9">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
-            Wizard Pemilihan Lokasi
+            {wizardCopy.frameEyebrow}
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-[var(--ut-blue-deep)] sm:text-3xl">
             {title}

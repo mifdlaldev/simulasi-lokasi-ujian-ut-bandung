@@ -1,3 +1,5 @@
+import { mapCopy } from "../../content/copy";
+
 export interface MapPreviewProps {
   address: string;
   label: string;
@@ -29,16 +31,16 @@ export function MapPreview({ address, label, latitude, longitude, mapUrl }: MapP
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         src={openStreetMapEmbedUrl}
-        title={`Pratinjau peta ${label}`}
+        title={mapCopy.iframeTitle(label)}
       />
       <div className="border-t border-[var(--ut-border)] p-5">
         <div className="rounded-[1.25rem] border border-[var(--ut-border)] bg-[var(--ut-surface)] p-5">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ut-blue)]">
-            Pratinjau Peta
+            {mapCopy.title}
           </p>
           <h3 className="mt-2 text-xl font-bold text-[var(--ut-blue-deep)]">{label}</h3>
           <p className="mt-2 text-sm leading-6 text-[var(--ut-muted)]">
-            Pratinjau memakai OpenStreetMap gratis. Koordinat bersifat dummy/prototype dan dapat diganti ketika data lokasi final tersedia.
+            {mapCopy.note}
           </p>
           <p className="mt-2 text-sm leading-6 text-[var(--ut-blue-deep)]">{address}</p>
           <div className="mt-4">
@@ -48,7 +50,7 @@ export function MapPreview({ address, label, latitude, longitude, mapUrl }: MapP
               rel="noreferrer"
               target="_blank"
             >
-              Buka di Google Maps
+              {mapCopy.openInGoogleMaps}
             </a>
           </div>
         </div>

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { mobileHeaderCopy } from "../../content/copy";
+
 export interface MobileStepHeaderProps {
   currentStepIndex: number;
   currentStepLabel: string;
@@ -22,16 +24,16 @@ export function MobileStepHeader({
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ut-muted)]">
-            Langkah {safeCurrent} dari {safeTotal}
+            {mobileHeaderCopy.stepLabel(safeCurrent, safeTotal)}
           </p>
           <h2 className="mt-1 text-lg font-bold text-[var(--ut-blue-deep)]">{currentStepLabel}</h2>
         </div>
         <div
-          aria-label={`Langkah ${safeCurrent} dari ${safeTotal}`}
+          aria-label={mobileHeaderCopy.stepLabel(safeCurrent, safeTotal)}
           aria-valuemax={safeTotal}
           aria-valuemin={1}
           aria-valuenow={safeCurrent}
-          aria-valuetext={`Langkah ${safeCurrent} dari ${safeTotal}`}
+          aria-valuetext={mobileHeaderCopy.stepLabel(safeCurrent, safeTotal)}
           className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--ut-yellow)] text-sm font-black text-[var(--ut-blue-deep)]"
           role="progressbar"
         >
@@ -42,7 +44,7 @@ export function MobileStepHeader({
       {summary ? (
         <details className="rounded-2xl border border-[var(--ut-border)] bg-white px-4 py-3">
           <summary className="cursor-pointer text-sm font-semibold text-[var(--ut-blue)] focus-visible:shadow-[var(--ut-focus-ring)]">
-            Lihat ringkasan pilihan
+            {mobileHeaderCopy.summaryToggle}
           </summary>
           <div className="mt-3">{summary}</div>
         </details>

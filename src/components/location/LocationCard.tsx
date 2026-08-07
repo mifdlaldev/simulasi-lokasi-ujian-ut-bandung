@@ -1,4 +1,5 @@
 import type { ExamLocation } from "../../types/location";
+import { locationCardCopy } from "../../content/copy";
 import { getEstimatedSeatCount } from "../../utils/quota";
 
 export interface LocationCardProps {
@@ -36,7 +37,7 @@ export function LocationCard({ location, onSelect, selected }: LocationCardProps
               : "bg-red-50 text-[var(--ut-danger)]",
         ].join(" ")}
       >
-        {selected ? "Lokasi dipilih" : hasQuota ? "Tersedia" : "Kuota penuh"}
+        {selected ? locationCardCopy.selected : hasQuota ? locationCardCopy.available : locationCardCopy.quotaFull}
       </span>
       <span className="mt-4 block text-xl font-bold tracking-tight">{location.schoolName}</span>
       <span className={selected ? "mt-2 text-sm leading-6 text-white/82" : "mt-2 text-sm leading-6 text-[var(--ut-muted)]"}>
@@ -45,7 +46,7 @@ export function LocationCard({ location, onSelect, selected }: LocationCardProps
       <span className="mt-5 grid gap-3 sm:grid-cols-2">
         <span className={selected ? "rounded-2xl bg-white/12 p-3" : "rounded-2xl bg-[var(--ut-blue-soft)] p-3"}>
           <span className={selected ? "block text-xs text-white/70" : "block text-xs text-[var(--ut-muted)]"}>
-            Tanggal Ujian
+            {locationCardCopy.examDate}
           </span>
           <span className="mt-1 block text-sm font-semibold">{location.examDate}</span>
           <span className={selected ? "mt-1 block text-xs font-semibold text-white/78" : "mt-1 block text-xs font-semibold text-[var(--ut-blue)]"}>
@@ -54,14 +55,14 @@ export function LocationCard({ location, onSelect, selected }: LocationCardProps
         </span>
         <span className={selected ? "rounded-2xl bg-white/12 p-3" : hasQuota ? "rounded-2xl bg-[var(--ut-yellow-soft)] p-3" : "rounded-2xl bg-red-50 p-3"}>
           <span className={selected ? "block text-xs text-white/70" : "block text-xs text-[var(--ut-muted)]"}>
-            Kuota
+            {locationCardCopy.quota}
           </span>
           <span className="mt-1 block text-sm font-semibold">
-            {hasQuota ? `${location.availableRooms} ruang` : "Kuota penuh"}
+            {hasQuota ? locationCardCopy.rooms(location.availableRooms) : locationCardCopy.quotaFull}
           </span>
           {hasQuota ? (
             <span className={selected ? "mt-1 block text-xs font-semibold text-white/78" : "mt-1 block text-xs font-semibold text-[var(--ut-blue)]"}>
-              ±{estimatedSeatCount} kursi tersedia
+              {locationCardCopy.seats(estimatedSeatCount)}
             </span>
           ) : null}
         </span>

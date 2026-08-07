@@ -1,6 +1,8 @@
 import { cloneElement, isValidElement } from "react";
 import type { ReactElement, ReactNode } from "react";
 
+import { wizardCopy } from "../../content/copy";
+
 interface FormFieldControlProps {
   id?: string;
   className?: string;
@@ -58,7 +60,7 @@ export function FormField({
         {required ? (
           <>
             <span aria-hidden="true"> *</span>
-            <span className="ut-sr-only"> wajib diisi</span>
+            <span className="ut-sr-only">{wizardCopy.requiredSrOnly}</span>
           </>
         ) : null}
       </label>

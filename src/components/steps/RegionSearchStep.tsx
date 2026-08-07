@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 
+import { regionStepCopy } from "../../content/copy";
 import type { ExamLocation, ExamRegion } from "../../types/location";
 
 export interface RegionSearchStepProps {
@@ -54,19 +55,19 @@ export function RegionSearchStep({
     <div className="space-y-5">
       <div>
         <label className="block text-sm font-semibold text-[var(--ut-blue-deep)]" htmlFor="region-search">
-          Cari Kabupaten/Kota
+          {regionStepCopy.label}
         </label>
         <input
-          aria-label="Cari kabupaten atau kota lokasi ujian"
+          aria-label={regionStepCopy.ariaLabel}
           className="mt-2 w-full rounded-2xl border border-[var(--ut-border-strong)] bg-white px-4 py-3 text-base text-[var(--ut-ink)] placeholder:text-[var(--ut-muted)] focus:border-[var(--ut-blue)] focus-visible:shadow-[var(--ut-focus-ring)]"
           id="region-search"
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Ketik Bandung, Cimahi, Garut..."
+          placeholder={regionStepCopy.placeholder}
           type="search"
           value={query}
         />
         <p className="mt-2 text-sm leading-6 text-[var(--ut-muted)]">
-          Pilih satu wilayah untuk menampilkan sekolah lokasi ujian yang tersedia.
+          {regionStepCopy.helper}
         </p>
         {error ? (
           <p className="mt-2 text-sm font-medium leading-6 text-[var(--ut-danger)]" role="alert">
@@ -77,11 +78,11 @@ export function RegionSearchStep({
 
       {selectedRegion ? (
         <div className="rounded-2xl border border-[var(--ut-blue)] bg-[var(--ut-blue-soft)] px-4 py-3 text-sm text-[var(--ut-blue-deep)]">
-          Wilayah terpilih: <strong>{selectedRegion.name}</strong>
+          {regionStepCopy.selectedPrefix} <strong>{selectedRegion.name}</strong>
         </div>
       ) : null}
 
-      <div className="grid gap-3" aria-label="Hasil pencarian wilayah">
+      <div className="grid gap-3" aria-label={regionStepCopy.ariaResults}>
         {filteredRegions.length > 0 ? (
           filteredRegions.map((region) => {
             const selected = region.id === selectedRegionId;
@@ -107,7 +108,9 @@ export function RegionSearchStep({
                 <span className="min-w-0">
                   <span className="block font-semibold">{region.name}</span>
                   <span className={selected ? "mt-1 block text-sm text-white/80" : "mt-1 block text-sm text-[var(--ut-muted)]"}>
-                    {availability.locationCount} lokasi ujian · {hasQuota ? `${availability.availableRooms} ruang tersedia` : "Kuota penuh"}
+                    {hasQuota
+                      ? regionStepCopy.availability(availability.locationCount, availability.availableRooms)
+                      : regionStepCopy.quotaFull}
                   </span>
                 </span>
                 <span className="flex shrink-0 items-center gap-2">
@@ -123,10 +126,10 @@ export function RegionSearchStep({
                           : "bg-red-50 text-[var(--ut-danger)]",
                     ].join(" ")}
                   >
-                    {hasQuota ? "Tersedia" : "Kuota penuh"}
+                    {hasQuota ? regionStepCopy.available : regionStepCopy.quotaFull}
                   </span>
                   <span className={selected ? "text-white/80" : "text-[var(--ut-muted)]"}>
-                    {selected ? "Terpilih" : "Pilih"}
+                    {selected ? regionStepCopy.chosen : regionStepCopy.choose}
                   </span>
                 </span>
               </button>
@@ -134,7 +137,7 @@ export function RegionSearchStep({
           })
         ) : (
           <p className="rounded-2xl border border-dashed border-[var(--ut-border-strong)] bg-white px-4 py-5 text-sm text-[var(--ut-muted)]">
-            Wilayah tidak ditemukan. Coba kata kunci lain seperti Bandung, Cimahi, Sumedang, atau Garut.
+            {regionStepCopy.emptyResults}
           </p>
         )}
       </div>
