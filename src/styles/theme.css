@@ -4,16 +4,14 @@
   --ut-blue-soft: #e6f0fb;
   --ut-yellow: #fff200;
   --ut-yellow-soft: #fff9b0;
-  --ut-white: #ffffff;
   --ut-surface: #f5f8fc;
   --ut-ink: #102033;
   --ut-muted: #52657a;
   --ut-border: #d9e4ef;
   --ut-border-strong: #a9bdd4;
   --ut-danger: #b42318;
-  --ut-success: #087443;
-  --ut-shadow-soft: 0 24px 70px rgba(3, 70, 148, 0.14);
   --ut-shadow-card: 0 18px 42px rgba(16, 32, 51, 0.12);
+  --ut-shadow-soft: 0 14px 32px rgba(16, 32, 51, 0.08);
   --ut-shadow-official: 0 30px 90px rgba(2, 46, 98, 0.18);
   --ut-focus-ring: 0 0 0 3px rgba(3, 70, 148, 0.5);
 }
@@ -60,11 +58,6 @@ a {
 .ut-official-card {
   border: 1px solid rgba(217, 228, 239, 0.96);
   box-shadow: var(--ut-shadow-official);
-}
-
-.ut-yellow-accent {
-  background: linear-gradient(90deg, var(--ut-yellow), #fff9b0);
-  color: var(--ut-blue-deep);
 }
 
 .ut-sr-only {

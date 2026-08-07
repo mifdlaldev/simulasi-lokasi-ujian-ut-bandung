@@ -1,0 +1,8 @@
+README run command verification
+
+22:npm install
+28:npm run dev
+34:npm run build
+40:npm run preview -- --host 127.0.0.1
+
+All required run commands are documented in README.md.

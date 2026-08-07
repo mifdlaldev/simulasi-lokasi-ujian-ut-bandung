@@ -1,0 +1,20 @@
+2:import type { ExamLocation, ExamRegion, StudentIdentity } from "../../types/location";
+6:  acknowledgementAccepted: boolean;
+7:  identity: StudentIdentity;
+8:  location: ExamLocation | null;
+11:  region: ExamRegion | null;
+24:  acknowledgementAccepted,
+25:  identity,
+26:  location,
+29:  region,
+34:        <SummaryRow label="NIM" value={identity.nim} />
+35:        <SummaryRow label="Nama Mahasiswa" value={identity.name} />
+36:        <SummaryRow label="Program Studi" value={identity.programStudy} />
+37:        <SummaryRow label="Kontak" value={identity.email || identity.phone} />
+38:        <SummaryRow label="Wilayah" value={region?.name ?? ""} />
+39:        <SummaryRow label="Sekolah Lokasi Ujian" value={location?.schoolName ?? ""} />
+40:        <SummaryRow label="Tanggal Ujian" value={location?.examDate ?? ""} />
+43:          value={location ? `${location.availableRooms} ruang tersedia` : ""}
+50:          {location?.address ?? "Belum ada sekolah lokasi ujian yang dipilih."}
+56:          checked={acknowledgementAccepted}
+68:      <Button disabled={!acknowledgementAccepted} onClick={onConfirm}>

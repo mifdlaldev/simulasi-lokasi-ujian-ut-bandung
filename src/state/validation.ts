@@ -11,7 +11,7 @@ function hasText(value: string): boolean {
   return value.trim().length > 0;
 }
 
-export function validateStudentIdentity(
+function validateStudentIdentity(
   identity: StudentIdentity,
 ): StudentIdentityErrors {
   const errors: StudentIdentityErrors = {};

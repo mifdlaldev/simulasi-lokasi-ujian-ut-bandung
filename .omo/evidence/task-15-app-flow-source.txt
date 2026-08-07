@@ -1,0 +1,39 @@
+17:  getNextStep,
+18:  getPreviousStep,
+23:import { canContinueFromStep } from "./state/validation";
+27:  identity: appCopy.identityIntro,
+28:  region: appCopy.regionIntro,
+29:  location: appCopy.locationIntro,
+30:  detail: appCopy.detailIntro,
+31:  review: appCopy.reviewIntro,
+32:  success: appCopy.successDescription,
+40:    () => examRegions.find((region) => region.id === state.selectedRegionId) ?? null,
+45:      examLocations.find((location) => location.id === state.selectedLocationId) ?? null,
+57:    const nextValidation = canContinueFromStep(state);
+63:    dispatch({ type: "SET_STEP", step: getNextStep(state.currentStep) });
+68:      identity={state.identity}
+69:      location={selectedLocation}
+70:      region={selectedRegion}
+81:  const isFirstStep = state.currentStep === "identity";
+82:  const isReviewStep = state.currentStep === "review";
+83:  const isSuccessStep = state.currentStep === "success";
+87:      case "identity":
+90:            onChange={(identity) => dispatch({ type: "SET_IDENTITY", identity })}
+91:            value={state.identity}
+94:      case "region":
+97:            onSelectRegion={(regionId) => {
+98:              dispatch({ type: "SET_REGION", regionId });
+104:      case "location":
+107:            locations={examLocations}
+108:            onSelectLocation={(locationId) => {
+109:              dispatch({ type: "SET_LOCATION", locationId });
+115:      case "detail":
+116:        return <LocationDetailStep location={selectedLocation} />;
+117:      case "review":
+121:            identity={state.identity}
+122:            location={selectedLocation}
+127:              const reviewValidation = canContinueFromStep(state, "review");
+133:              dispatch({ type: "CONFIRM_FINAL" });
+135:            region={selectedRegion}
+138:      case "success":
+142:            selectedSchoolName={selectedLocation?.schoolName}

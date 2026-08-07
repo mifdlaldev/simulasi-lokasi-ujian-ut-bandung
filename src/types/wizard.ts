@@ -14,7 +14,6 @@ export interface WizardState {
   selectedRegionId: string;
   selectedLocationId: string;
   acknowledgementAccepted: boolean;
-  finalConfirmed: boolean;
 }
 
 export type WizardAction =

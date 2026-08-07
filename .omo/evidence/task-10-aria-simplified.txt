@@ -1,0 +1,1 @@
+Region search uses native search input plus button results; no custom combobox/listbox/option roles.

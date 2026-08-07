@@ -1,0 +1,15 @@
+src/components/layout/SelectionSummary.tsx:1:import type { ExamLocation, ExamRegion, StudentIdentity } from "../../types/location";
+src/components/layout/SelectionSummary.tsx:5:  location: ExamLocation | null;
+src/components/layout/SelectionSummary.tsx:6:  region: ExamRegion | null;
+src/components/layout/SelectionSummary.tsx:18:export function SelectionSummary({ identity, location, region }: SelectionSummaryProps) {
+src/components/layout/SelectionSummary.tsx:30:        <SummaryItem label="Wilayah" value={region?.name || "Belum memilih wilayah"} />
+src/components/layout/SelectionSummary.tsx:31:        <SummaryItem label="Sekolah" value={location?.schoolName || "Belum memilih sekolah"} />
+src/components/layout/SelectionSummary.tsx:32:        <SummaryItem label="Tanggal" value={location?.examDate || "Menunggu pilihan lokasi"} />
+src/components/layout/MobileStepHeader.tsx:5:  currentStepLabel: string;
+src/components/layout/MobileStepHeader.tsx:12:  currentStepLabel,
+src/components/layout/MobileStepHeader.tsx:18:  const progressPercent = Math.round((safeCurrent / safeTotal) * 100);
+src/components/layout/MobileStepHeader.tsx:27:          <h2 className="mt-1 text-lg font-bold text-[var(--ut-blue-deep)]">{currentStepLabel}</h2>
+src/components/layout/MobileStepHeader.tsx:30:          aria-label={`Progres ${progressPercent} persen`}
+src/components/layout/MobileStepHeader.tsx:33:          aria-valuenow={progressPercent}
+src/components/layout/MobileStepHeader.tsx:35:          role="progressbar"
+src/components/layout/MobileStepHeader.tsx:37:          {progressPercent}%

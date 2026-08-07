@@ -202,7 +202,3 @@ export const examLocations: ExamLocation[] = [
     description: "Lokasi simulasi tambahan untuk wilayah Kabupaten Bandung bagian timur.",
   },
 ];
-
-export function getLocationsByRegion(regionId: string): ExamLocation[] {
-  return examLocations.filter((location) => location.regionId === regionId);
-}

@@ -1,0 +1,8 @@
+6:  onSelectRegion: (regionId: string) => void;
+12:  onSelectRegion,
+20:  const filteredRegions = useMemo(() => {
+41:          placeholder="Ketik Bandung, Cimahi, Garut..."
+57:        {filteredRegions.length > 0 ? (
+58:          filteredRegions.map((region) => {
+71:                onClick={() => onSelectRegion(region.id)}
+83:            Wilayah tidak ditemukan. Coba kata kunci lain seperti Bandung, Cimahi, Sumedang, atau Garut.

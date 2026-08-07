@@ -1,0 +1,21 @@
+Wave 3B Task 16 validation QA
+
+Identity validation:
+- Clicked Lanjutkan on empty identity step.
+- Result: stayed on identity step and displayed field-level errors.
+- Visible errors verified: NIM wajib diisi, Nama mahasiswa wajib diisi, Program studi wajib diisi, Isi email atau nomor HP sebagai kontak.
+- Screenshot: .sisyphus/evidence/task-16-identity-validation.png
+
+Region validation:
+- Filled valid identity, advanced to region step, clicked Lanjutkan without selecting a region.
+- Result: stayed on region step and displayed inline error: Pilih kabupaten/kota wilayah ujian terlebih dahulu.
+
+Location validation:
+- Selected Kota Bandung, advanced to location step, clicked Lanjutkan without selecting a school.
+- Result: stayed on location step and displayed inline error: Pilih sekolah lokasi ujian terlebih dahulu.
+- Screenshot: .sisyphus/evidence/task-16-location-validation.png
+
+Final acknowledgement:
+- Confirm button disabled before acknowledgement checkbox.
+- Helper text visible: Centang pernyataan untuk mengaktifkan tombol konfirmasi final.
+- Confirm button enabled after checkbox was checked.

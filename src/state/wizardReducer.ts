@@ -10,7 +10,7 @@ export const wizardSteps: WizardStep[] = [
   "success",
 ];
 
-export const initialStudentIdentity: StudentIdentity = {
+const initialStudentIdentity: StudentIdentity = {
   nim: "",
   name: "",
   programStudy: "",
@@ -24,7 +24,6 @@ export const initialWizardState: WizardState = {
   selectedRegionId: "",
   selectedLocationId: "",
   acknowledgementAccepted: false,
-  finalConfirmed: false,
 };
 
 export function wizardReducer(
@@ -50,7 +49,6 @@ export function wizardReducer(
       return {
         ...state,
         currentStep: "success",
-        finalConfirmed: true,
       };
     case "RESET":
       return initialWizardState;

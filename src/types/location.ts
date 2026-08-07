@@ -26,8 +26,3 @@ export interface ExamLocation {
   galleryPhotoUrls: string[];
   description: string;
 }
-
-export interface ExamLocationSelection {
-  region: ExamRegion | null;
-  location: ExamLocation | null;
-}

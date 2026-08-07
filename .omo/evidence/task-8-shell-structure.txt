@@ -1,0 +1,9 @@
+src/components/layout/AppShell.tsx:5:import { Stepper, type StepperItem } from "../ui/Stepper";
+src/components/layout/AppShell.tsx:8:  children: ReactNode;
+src/components/layout/AppShell.tsx:10:  steps: StepperItem[];
+src/components/layout/AppShell.tsx:14:export function AppShell({ children, currentStepId, steps, summary }: AppShellProps) {
+src/components/layout/AppShell.tsx:40:          <Stepper currentStepId={currentStepId} steps={steps} />
+src/components/layout/AppShell.tsx:44:          <div id="wizard-content">{children}</div>
+src/components/layout/WizardFrame.tsx:4:  children: ReactNode;
+src/components/layout/WizardFrame.tsx:12:  children,
+src/components/layout/WizardFrame.tsx:33:        <div className="mt-7">{children}</div>
